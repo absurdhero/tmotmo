@@ -41,12 +41,18 @@
     <Reference Include="nunit.framework">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\..\Downloads\Moq.4.0.10827\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework, Version=3.0.1.0, Culture=neutral">
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CameraTests.cs" />
+    <Compile Include="CameraTests.cs">
+      <DependentUpon>CameraTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpriteTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

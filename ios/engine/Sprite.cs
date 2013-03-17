@@ -101,12 +101,7 @@ public class Sprite {
 	/// Center of sprite in World space
 	public Vector2 Center() {
 		var centerPoint = textures[0].Bounds.Center;
-		var center = new Vector2(centerPoint.X, centerPoint.Y) + Camera.main.WorldToScreen2D(Vector2.Zero);
-		//System.Console.WriteLine ("center " + center);
-		//System.Console.WriteLine ("bounds " + textures[0].Bounds);
-//		System.Console.WriteLine ("s0,0 : " + Camera.main.ScreenToWorld2D(Vector2.Zero));
-//		System.Console.WriteLine ("v1,1 : " + Camera.main.ViewportToWorld2D(Vector2.One));
-		System.Console.WriteLine ("wcenter : " + Camera.main.ScreenToWorld2D(new Vector2(center.X, center.Y)));
+		var center = Camera.main.WorldToScreen2D(Vector2.Zero) + new Vector2(centerPoint.X, centerPoint.Y);
 		return Camera.main.ScreenToWorld2D(new Vector2(center.X, center.Y));
 	}
 	
