@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{111DA5BE-86BD-4C8A-AB71-829C21CEA973}</ProjectGuid>
+    <ProjectTypeGuids>{9B831FEF-F496-498F-9FE8-180DA5CB4258};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>windows</RootNamespace>
+    <MonoGamePlatform>WindowsGL</MonoGamePlatform>
+    <AssemblyName>windows</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="MonoGame.Framework, Version=3.0.1.0, Culture=neutral">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="..\ios\engine\Camera.cs">
+      <Link>engine\Camera.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Game1.cs">
+      <Link>engine\Game1.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Sprite.cs">
+      <Link>engine\Sprite.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\TitleScene.cs">
+      <Link>scenes\TitleScene.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="engine\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ios\Content\logo.png">
+      <Link>Content\logo.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\.DS_Store">
+      <Link>Content\TitleScene\.DS_Store</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\bg.png">
+      <Link>Content\TitleScene\bg.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\itunes1.png">
+      <Link>Content\TitleScene\itunes1.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\itunes2.png">
+      <Link>Content\TitleScene\itunes2.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\news1.png">
+      <Link>Content\TitleScene\news1.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\news2.png">
+      <Link>Content\TitleScene\news2.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\p1.png">
+      <Link>Content\TitleScene\p1.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\p2.png">
+      <Link>Content\TitleScene\p2.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\p3.png">
+      <Link>Content\TitleScene\p3.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\p4.png">
+      <Link>Content\TitleScene\p4.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\p5.png">
+      <Link>Content\TitleScene\p5.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\p6.png">
+      <Link>Content\TitleScene\p6.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tap1.png">
+      <Link>Content\TitleScene\tap1.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tap2.png">
+      <Link>Content\TitleScene\tap2.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tap3.png">
+      <Link>Content\TitleScene\tap3.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tmo1.png">
+      <Link>Content\TitleScene\tmo1.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tmo2.png">
+      <Link>Content\TitleScene\tmo2.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tmo3.png">
+      <Link>Content\TitleScene\tmo3.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tmo4.png">
+      <Link>Content\TitleScene\tmo4.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tmo5.png">
+      <Link>Content\TitleScene\tmo5.png</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\tmo6.png">
+      <Link>Content\TitleScene\tmo6.png</Link>
+    </None>
+  </ItemGroup>
+</Project>
