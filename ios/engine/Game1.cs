@@ -20,10 +20,7 @@ public class Game1 : Game
 
 #region Fields
 	GraphicsDeviceManager graphics;
-	SpriteBatch spriteBatch;
-	Texture2D logoTexture;
 	Camera camera;
-	BasicEffect basicEffect;
 	TitleScene titleScene;
 #endregion
 
@@ -47,9 +44,6 @@ public class Game1 : Game
 	{
 		camera = new Camera(graphics.GraphicsDevice.Viewport);
 		Camera.main = camera;
-		basicEffect = new BasicEffect (graphics.GraphicsDevice);
-		basicEffect.VertexColorEnabled = true;
-		basicEffect.Projection = Matrix.CreateOrthographicOffCenter(0, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height, 0, 0, 1);
 
 		base.Initialize ();
 	}
@@ -61,13 +55,10 @@ public class Game1 : Game
 	protected override void LoadContent ()
 	{
 		// Create a new SpriteBatch, which can be use to draw textures.
-		spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
+//		spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
 
-		titleScene = new TitleScene (Content, spriteBatch);			
+		titleScene = new TitleScene (Content, graphics);
 		titleScene.Setup (new GameTime().TotalGameTime.Milliseconds);
-
-		// TODO: use this.Content to load your game content here eg.
-		logoTexture = Content.Load<Texture2D> ("logo");
 	}
 
 #endregion
@@ -95,21 +86,9 @@ public class Game1 : Game
 		// Clear the backbuffer
 		graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
 
-
-		//spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.ViewMatrix());
-		spriteBatch.Begin ();
-
-		// draw the logo
-		spriteBatch.Draw (logoTexture, new Vector2 (130, 200), Color.White);
-
 		// draw scene
 		titleScene.Draw();
 
-		spriteBatch.End();
-		
-		basicEffect.CurrentTechnique.Passes[0].Apply();
-
-		//TODO: Add your drawing code here
 		base.Draw (gameTime);
 	}
 

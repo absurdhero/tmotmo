@@ -1,10 +1,12 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using TexturedQuad;
 
 public class Sprite {
-	private SpriteBatch spriteBatch;
+	private GraphicsDeviceManager graphics;
 	public Texture2D[] textures;
+	Quad quad;
 
 	public int height = 0;
 	public int width = 0;
@@ -14,10 +16,23 @@ public class Sprite {
 
 	private bool isVisible = true;
 
-	public Vector2 screenPosition { get; set; }
+	private Vector2 _screenPosition;
+	public Vector2 screenPosition {
+		get {
+			return _screenPosition;
+		}
+		set {
+			_screenPosition = value;
+			quad = new Quad(Camera.main.ScreenToWorldPoint(new Vector3(value, 0)), Vector3.Forward, Vector3.Down, width, height);
+		}
+	}
 	public Vector2 worldPosition { 
-		get { return Camera.main.ScreenToWorld2D(screenPosition); }
-		set { screenPosition = Camera.main.WorldToScreen2D(screenPosition); }
+		get {
+			return Camera.main.ScreenToWorld2D(screenPosition);
+		}
+		set {
+			screenPosition = Camera.main.WorldToScreen2D(value);
+		}
 	}
 
 
@@ -45,24 +60,47 @@ public class Sprite {
 		return textures;
 	}
 
-	public Sprite(SpriteBatch spriteBatch, ContentManager content, object obj, params string[] textureNames) 
-		: this(spriteBatch, content, pathsForClassName (obj, textureNames)) { }
+	public Sprite(GraphicsDeviceManager graphics, ContentManager content, object obj, params string[] textureNames) 
+	: this(graphics, content, pathsForClassName (obj, textureNames)) { }
 	
-	public Sprite(SpriteBatch spriteBatch, ContentManager content, params string[] texturePaths)
-		: this(spriteBatch, loadFromPaths (content, texturePaths)) { }
+	public Sprite(GraphicsDeviceManager graphics, ContentManager content, params string[] texturePaths)
+	: this(graphics, loadFromPaths (content, texturePaths)) { }
 
-	public Sprite(SpriteBatch spriteBatch, Texture2D[] textures) {
-		this.spriteBatch = spriteBatch;
+	public Sprite(GraphicsDeviceManager graphics, Texture2D[] textures) {
+		this.graphics = graphics;
 		this.textures = textures;
 
 		width = textures[0].Width;
 		height = textures[0].Height;
+
+		quad = new Quad(Vector3.Zero, Vector3.Forward, Vector3.Down, width, height);
 	}
 
 	public void Draw()
 	{
 		if (isVisible) {
-			spriteBatch.Draw(textures[texture_index], screenPosition, Color.White);
+			BasicEffect quadEffect = new BasicEffect(graphics.GraphicsDevice);
+
+			// We still do not have lighting implemented in the shaders
+			//quadEffect.EnableDefaultLighting();
+			
+			quadEffect.World = Camera.main.world;
+			quadEffect.View = Camera.main.view;
+			quadEffect.Projection = Camera.main.projection;
+			quadEffect.Texture = textures[texture_index];
+			quadEffect.TextureEnabled = true;
+
+			foreach (EffectPass pass in quadEffect.CurrentTechnique.Passes)
+			{
+				pass.Apply();
+				
+				graphics.GraphicsDevice.DrawUserIndexedPrimitives
+					<VertexPositionNormalTexture>(
+						PrimitiveType.TriangleList,
+						quad.Vertices, 0, 4,
+						quad.Indexes, 0, 2);
+			}
+
 		}
 	}	
 

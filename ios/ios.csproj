@@ -106,6 +106,7 @@
     <Compile Include="engine\Sprite.cs" />
     <Compile Include="engine\Game1.cs" />
     <Compile Include="scenes\TitleScene.cs" />
+    <Compile Include="engine\TexturedQuad.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

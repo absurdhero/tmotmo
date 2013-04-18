@@ -12,8 +12,7 @@ public class TitleScene {
 	public Sprite background;
 
 	ContentManager content;
-
-	SpriteBatch spriteBatch;
+	GraphicsDeviceManager graphics;
 
 	//private Cycler cycle_title, cycle_start;
 	
@@ -23,31 +22,29 @@ public class TitleScene {
 //		input = new UnityInput();
 //	}
 	
-	public TitleScene(ContentManager content, SpriteBatch spriteBatch) {
-		this.spriteBatch = spriteBatch;
+	public TitleScene(ContentManager content, GraphicsDeviceManager graphics) {
+		this.graphics = graphics;
 		this.content = content;
 	}
 
 	public void Setup(float startTime) {
 		//background = FullScreenQuad.create(this, "bg");
-		title = new Sprite(spriteBatch, content, this, new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
-		subtitle = new Sprite(spriteBatch, content, this, new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
-		news = new Sprite(spriteBatch, content, this, new[] {"news1", "news2"});
-		buyMusic = new Sprite(spriteBatch, content, this, new[] {"itunes1", "itunes2"});
-		startButton = new Sprite(spriteBatch, content, this, new[] {"tap1", "tap2", "tap3"});
+		title = new Sprite(graphics, content, this, new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
+		subtitle = new Sprite(graphics, content, this, new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
+		news = new Sprite(graphics, content, this, new[] {"news1", "news2"});
+		buyMusic = new Sprite(graphics, content, this, new[] {"itunes1", "itunes2"});
+		startButton = new Sprite(graphics, content, this, new[] {"tap1", "tap2", "tap3"});
 		
 		Camera cam = Camera.main;
 
+		System.Console.WriteLine ("center " + title.Center ());
 		var layoutpos = cam.ViewportToWorld2D(new Vector2(0.5f, 0.65f));
-		System.Console.WriteLine ("screenEdgesToWorld " + cam.ScreenToWorld2D(Vector2.Zero) + ", " + cam.ScreenToWorld2D(Vector2.One));
-		System.Console.WriteLine ("viewToworld(0.5f, 0.65f) => " + layoutpos);
-		System.Console.WriteLine ("viewToScreen => " + cam.WorldToScreenPoint(new Vector3(layoutpos, Camera.NEAR)));
+		System.Console.WriteLine ("layoutpos " + layoutpos);
 		layoutpos -= title.Center();
-		System.Console.WriteLine ("minus center viewToworld(0.5f, 0.65f) => " + layoutpos);
-		System.Console.WriteLine ("minus center viewToScreen(0.5f, 0.65f) => " + cam.WorldToScreenPoint(new Vector3(layoutpos, Camera.NEAR)));
 		title.worldPosition = layoutpos;
+
 //		// Anchor the subtitle an absolute distance from wherever the title ended up
-//		subtitle.transform.position = title.transform.position + title.Center() + new Vector3(15f, -20f, -1f);
+//		subtitle.worldPosition = title.worldPosition + title.Center() + new Vector3(15f, -20f, -1f);
 		
 		// add blinking start text below title but don't display it yet
 //		startButton.setCenterToViewportCoord(0.5f, 0.4f);
