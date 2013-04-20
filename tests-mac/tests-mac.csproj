@@ -55,10 +55,4 @@
     <Compile Include="SpriteTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\mac\mac.csproj">
-      <Project>{13F3761B-9FB4-4487-B7EB-35C34BD83B5A}</Project>
-      <Name>mac</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

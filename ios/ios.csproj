@@ -107,6 +107,9 @@
     <Compile Include="engine\Game1.cs" />
     <Compile Include="scenes\TitleScene.cs" />
     <Compile Include="engine\TexturedQuad.cs" />
+    <Compile Include="engine\FullScreenQuad.cs" />
+    <Compile Include="engine\Cycler.cs" />
+    <Compile Include="engine\Time.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

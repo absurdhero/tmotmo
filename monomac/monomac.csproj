@@ -88,6 +88,15 @@
     <Compile Include="..\ios\scenes\TitleScene.cs">
       <Link>scenes\TitleScene.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\FullScreenQuad.cs">
+      <Link>engine\FullScreenQuad.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Time.cs">
+      <Link>engine\Time.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Cycler.cs">
+      <Link>engine\Cycler.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

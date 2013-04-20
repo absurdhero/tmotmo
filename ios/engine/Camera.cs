@@ -14,7 +14,10 @@ public class Camera
 	public const float NEAR = 0.1f;
 	public const float FAR = 1000f;
 	// half the camera height
-	public const float orthographicSize = 160;
+    public float orthographicSize { get { return 160; } }
+
+    public int pixelWidth { get { return viewport.Width; } }
+    public int pixelHeight { get { return viewport.Height; } }
 
 	public Camera (Viewport viewport)
 	{

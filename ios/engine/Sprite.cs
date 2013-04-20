@@ -2,11 +2,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using TexturedQuad;
+using System;
 
 public class Sprite {
-	private GraphicsDeviceManager graphics;
+	protected GraphicsDeviceManager graphics;
 	public Texture2D[] textures;
-	Quad quad;
+	protected Quad quad;
 
 	public int height = 0;
 	public int width = 0;
@@ -16,22 +17,22 @@ public class Sprite {
 
 	private bool isVisible = true;
 
-	private Vector2 _screenPosition;
-	public Vector2 screenPosition {
+	private Vector3 _screenPosition;
+	public Vector3 screenPosition {
 		get {
 			return _screenPosition;
 		}
 		set {
 			_screenPosition = value;
-			quad = new Quad(Camera.main.ScreenToWorldPoint(new Vector3(value, 0)), Vector3.Forward, Vector3.Down, width, height);
+			quad = new Quad(Camera.main.ScreenToWorldPoint(value), Vector3.Forward, Vector3.Down, width, height);
 		}
 	}
-	public Vector2 worldPosition { 
+	public Vector3 worldPosition {
 		get {
-			return Camera.main.ScreenToWorld2D(screenPosition);
+			return Camera.main.ScreenToWorldPoint(screenPosition);
 		}
 		set {
-			screenPosition = Camera.main.WorldToScreen2D(value);
+			screenPosition = Camera.main.WorldToScreenPoint(value);
 		}
 	}
 
@@ -73,22 +74,23 @@ public class Sprite {
 		width = textures[0].Width;
 		height = textures[0].Height;
 
-		quad = new Quad(Vector3.Zero, Vector3.Forward, Vector3.Down, width, height);
+		createMesh();
+	}
+
+	virtual protected void createMesh()
+	{
+		quad = new Quad (Vector3.Zero, Vector3.Forward, Vector3.Down, width, height);
 	}
 
 	public void Draw()
 	{
 		if (isVisible) {
-			BasicEffect quadEffect = new BasicEffect(graphics.GraphicsDevice);
+			var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
 
-			// We still do not have lighting implemented in the shaders
-			//quadEffect.EnableDefaultLighting();
-			
 			quadEffect.World = Camera.main.world;
 			quadEffect.View = Camera.main.view;
 			quadEffect.Projection = Camera.main.projection;
 			quadEffect.Texture = textures[texture_index];
-			quadEffect.TextureEnabled = true;
 
 			foreach (EffectPass pass in quadEffect.CurrentTechnique.Passes)
 			{
@@ -138,9 +140,9 @@ public class Sprite {
 	
 	/// Center of sprite in World space
 	public Vector2 Center() {
-		var centerPoint = textures[0].Bounds.Center;
-		var center = Camera.main.WorldToScreen2D(Vector2.Zero) + new Vector2(centerPoint.X, centerPoint.Y);
-		return Camera.main.ScreenToWorld2D(new Vector2(center.X, center.Y));
+		var centerOfSprite = textures[0].Bounds.Center;
+		var centerOnScreen = Camera.main.WorldToScreen2D(Vector2.Zero) + new Vector2(centerOfSprite.X, centerOfSprite.Y);
+		return Camera.main.ScreenToWorld2D(centerOnScreen);
 	}
 	
 	public int PixelWidth() {
@@ -200,10 +202,10 @@ public class Sprite {
 //	}
 //	
 //	/* In viewport space, 0 and 1 are the edges of the screen. */
-//	public void setCenterToViewportCoord(float x, float y) {
-//		var layoutpos = snapToPixel(Camera.main.ViewportToWorldPoint(new Vector3(x, y, 0.0f)));
-//		gameObject.transform.position = new Vector3(layoutpos.x, layoutpos.y, gameObject.transform.position.z) - Center();
-//	}
+	public void setCenterToViewportCoord(float x, float y) {
+		var centeredPosition = snapToPixel(Camera.main.ViewportToWorldPoint(new Vector3(x, y, 0.0f)));
+		worldPosition = new Vector3(centeredPosition.X, centeredPosition.Y, centeredPosition.Z) - new Vector3(Center(), 0);
+	}
 //	
 //	public void setWorldPosition(float x, float y, float z) {
 //		setWorldPosition(new Vector3(x, y, z));
@@ -287,15 +289,15 @@ public class Sprite {
 //		get { return width / Camera.main.pixelWidth * Camera.main.orthographicSize * 2.0f; }
 //	}
 //
-//	private Vector3 snapToPixel(Vector3 pos) {
-//		Vector3 newpos;
-//		float pixelRatio = (Camera.main.orthographicSize * 2) / Camera.main.pixelHeight;
-//		
-//		newpos.x = Mathf.Round(pos.x / pixelRatio) * pixelRatio;
-//		newpos.y = Mathf.Round(pos.y / pixelRatio) * pixelRatio;
-//		newpos.z = pos.z;
-//		return newpos;
-//	}
+	private Vector3 snapToPixel(Vector3 pos) {
+		Vector3 newpos;
+		float pixelRatio = (Camera.main.orthographicSize * 2) / Camera.main.pixelHeight;
+		
+		newpos.X = (float) Math.Round(pos.X / pixelRatio) * pixelRatio;
+		newpos.Y = (float) Math.Round(pos.Y / pixelRatio) * pixelRatio;
+		newpos.Z = pos.Z;
+		return newpos;
+	}
 //	
 //	private void copyTransformTo(GameObject obj) {
 //		obj.transform.parent = gameObject.transform.parent;

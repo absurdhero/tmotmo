@@ -73,9 +73,9 @@ public class Game1 : Game
 	/// <param name="gameTime">Provides a snapshot of timing values.</param>
 	protected override void Update (GameTime gameTime)
 	{
-		// TODO: Add your update logic here			
-        		
-		base.Update (gameTime);
+		Time.setFromGameTime(gameTime);
+        titleScene.Update();
+        base.Update (gameTime);
 	}
 
 	/// <summary>
