@@ -21,7 +21,6 @@ public class Game1 : Game
 #region Fields
 	GraphicsDeviceManager graphics;
 	Camera camera;
-	TitleScene titleScene;
 
     SceneManager sceneManager;
 #endregion

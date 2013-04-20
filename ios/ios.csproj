@@ -15,7 +15,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;MonoTouch</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -118,6 +118,7 @@
     <Compile Include="engine\Debug.cs" />
     <Compile Include="engine\UnityInput.cs" />
     <Compile Include="engine\TouchSensor.cs" />
+    <Compile Include="engine\Application.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

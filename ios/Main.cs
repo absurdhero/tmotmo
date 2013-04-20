@@ -12,7 +12,6 @@ class Program : UIApplicationDelegate
 
 	public override void FinishedLaunching (UIApplication app)
 	{
-		// Fun begins..
 		game = new Game1 ();
 		game.Run ();
 	}

@@ -13,7 +13,7 @@ public abstract class Scene : MarshalByRefObject {
 
 	public float rewindTime { get; protected set; }
 
-	private UnityInput input;
+	protected UnityInput input;
 
 	public virtual float TimeLength() {
 		return timeLength;

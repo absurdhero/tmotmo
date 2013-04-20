@@ -14,10 +14,7 @@ public class TitleScene : Scene {
 
 	private Cycler cycle_title, cycle_start;
 	
-	private UnityInput input;
-
 	public TitleScene(SceneManager manager, ContentManager content, GraphicsDeviceManager graphics) : base(manager, content, graphics) {
-		this.input = new UnityInput();
 	}
 
 	public override void Setup(float startTime) {
@@ -66,10 +63,10 @@ public class TitleScene : Scene {
 		var touch = new TouchSensor(input);
 		
 		if (touch.insideSprite(Camera.main, buyMusic)) {
-//			Application.OpenURL("http://itunes.apple.com/us/album/same-not-same-ep/id533347009");
+			Application.OpenURL("http://itunes.apple.com/us/album/same-not-same-ep/id533347009");
 		}
 		else if (touch.insideSprite(Camera.main, news)) {
-//			Application.OpenURL("http://themakingofthemakingof.com");
+			Application.OpenURL("http://themakingofthemakingof.com");
 		}
 		else if (touch.hasTaps()) {
 			endScene();
