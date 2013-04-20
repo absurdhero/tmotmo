@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using TouchInput;
 
 public abstract class Scene : MarshalByRefObject {
 	protected float timeLength = 0.0f;

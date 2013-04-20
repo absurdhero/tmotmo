@@ -118,6 +118,9 @@
     <Compile Include="..\ios\engine\Scene.cs">
       <Link>engine\Scene.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\TouchSensor.cs">
+      <Link>engine\TouchSensor.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

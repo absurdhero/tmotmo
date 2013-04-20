@@ -75,8 +75,13 @@ public class Game1 : Game
 	/// <param name="gameTime">Provides a snapshot of timing values.</param>
 	protected override void Update (GameTime gameTime)
 	{
+        // set game time for this frame
 		Time.setFromGameTime(gameTime);
+        // set the touch state for this frame
+        TouchInput.UnityInput.touchCollection = TouchPanel.GetState();
+
         sceneManager.Update();
+
         base.Update (gameTime);
 	}
 

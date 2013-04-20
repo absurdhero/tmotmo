@@ -174,13 +174,13 @@ public class Sprite {
 //		return new Vector2(pos.x + width / 2, pos.y + height / 2);
 //	}
 
-//	public bool Contains(Camera camera, Vector2 position) {
-//		return ScreenRect(camera).Contains(position);
-//	}
-//	
-//	public bool Contains(Camera camera, Vector3 position) {
-//		return ScreenRect(camera).Contains(new Vector2(position.x, position.y));
-//	}
+	public bool Contains(Camera camera, Vector2 position) {
+		return ScreenRect(camera).Contains(new Point((int) position.X, (int) position.Y));
+	}
+	
+	public bool Contains(Camera camera, Vector3 position) {
+		return ScreenRect(camera).Contains(new Point((int) position.X, (int) position.X));
+	}
 //
 //	public void setScreenPosition(float x, float y) {
 //		Vector3 pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);

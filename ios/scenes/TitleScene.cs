@@ -2,6 +2,7 @@ using System;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using TouchInput;
 
 public class TitleScene : Scene {
 	public Sprite title;
@@ -62,18 +63,18 @@ public class TitleScene : Scene {
 	}
 
 	public override void Update () {
-//		var touch = new TouchSensor(input);
-//		
-//		if (touch.insideSprite(Camera.main, buyMusic)) {
+		var touch = new TouchSensor(input);
+		
+		if (touch.insideSprite(Camera.main, buyMusic)) {
 //			Application.OpenURL("http://itunes.apple.com/us/album/same-not-same-ep/id533347009");
-//		}
-//		else if (touch.insideSprite(Camera.main, news)) {
+		}
+		else if (touch.insideSprite(Camera.main, news)) {
 //			Application.OpenURL("http://themakingofthemakingof.com");
-//		}
-//		else if (touch.hasTaps()) {
-//			endScene();
-//		}
-//
+		}
+		else if (touch.hasTaps()) {
+			endScene();
+		}
+
 		if (cycle_title.Complete()) {
 			animateStartButton();
 		}

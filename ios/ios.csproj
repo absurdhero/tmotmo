@@ -117,6 +117,7 @@
     <Compile Include="engine\MessagePromptCoordinator.cs" />
     <Compile Include="engine\Debug.cs" />
     <Compile Include="engine\UnityInput.cs" />
+    <Compile Include="engine\TouchSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
