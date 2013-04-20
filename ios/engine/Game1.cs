@@ -42,6 +42,7 @@ public class Game1 : Game
 	/// </summary>
 	protected override void Initialize ()
 	{
+		graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
 		camera = new Camera(graphics.GraphicsDevice.Viewport);
 		Camera.main = camera;
 
