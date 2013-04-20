@@ -110,6 +110,13 @@
     <Compile Include="engine\FullScreenQuad.cs" />
     <Compile Include="engine\Cycler.cs" />
     <Compile Include="engine\Time.cs" />
+    <Compile Include="engine\SceneManager.cs" />
+    <Compile Include="engine\Scene.cs" />
+    <Compile Include="engine\LoopTracker.cs" />
+    <Compile Include="engine\SceneFactory.cs" />
+    <Compile Include="engine\MessagePromptCoordinator.cs" />
+    <Compile Include="engine\Debug.cs" />
+    <Compile Include="engine\UnityInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

@@ -22,6 +22,8 @@ public class Game1 : Game
 	GraphicsDeviceManager graphics;
 	Camera camera;
 	TitleScene titleScene;
+
+    SceneManager sceneManager;
 #endregion
 
 #region Initialization
@@ -55,12 +57,12 @@ public class Game1 : Game
 	/// </summary>
 	protected override void LoadContent ()
 	{
-		// Create a new SpriteBatch, which can be use to draw textures.
-//		spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
+        sceneManager = new SceneManager(new LoopTracker(), new MessagePromptCoordinator());
+        var sceneFactory = new SceneFactory(sceneManager, Content, graphics);
 
-		titleScene = new TitleScene (Content, graphics);
-		titleScene.Setup (new GameTime().TotalGameTime.Milliseconds);
-	}
+        // create the scene objects and preload their content
+        sceneManager.LoadAndStart(sceneFactory);
+    }
 
 #endregion
 
@@ -74,7 +76,7 @@ public class Game1 : Game
 	protected override void Update (GameTime gameTime)
 	{
 		Time.setFromGameTime(gameTime);
-        titleScene.Update();
+        sceneManager.Update();
         base.Update (gameTime);
 	}
 
@@ -88,7 +90,7 @@ public class Game1 : Game
 		graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
 
 		// draw scene
-		titleScene.Draw();
+        sceneManager.Draw();
 
 		base.Draw (gameTime);
 	}

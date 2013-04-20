@@ -55,4 +55,10 @@
     <Compile Include="SpriteTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\monomac\monomac.csproj">
+      <Project>{82567571-2A39-44AA-A4F9-C1CB2B5AA365}</Project>
+      <Name>monomac</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

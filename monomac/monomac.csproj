@@ -97,6 +97,27 @@
     <Compile Include="..\ios\engine\Cycler.cs">
       <Link>engine\Cycler.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\SceneFactory.cs">
+      <Link>engine\SceneFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SceneManager.cs">
+      <Link>engine\SceneManager.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\LoopTracker.cs">
+      <Link>engine\LoopTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\UnityInput.cs">
+      <Link>engine\UnityInput.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\MessagePromptCoordinator.cs">
+      <Link>engine\MessagePromptCoordinator.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Debug.cs">
+      <Link>engine\Debug.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Scene.cs">
+      <Link>engine\Scene.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

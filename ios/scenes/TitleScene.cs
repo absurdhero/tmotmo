@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-public class TitleScene {
+public class TitleScene : Scene {
 	public Sprite title;
 	public Sprite subtitle;
 	public Sprite news;
@@ -11,23 +11,15 @@ public class TitleScene {
 	public Sprite startButton;
 	public Sprite background;
 
-	ContentManager content;
-	GraphicsDeviceManager graphics;
-
 	private Cycler cycle_title, cycle_start;
 	
-	//private UnityInput input;
-	
-//	public TitleScene(SceneManager manager) : base(manager) {
-//		input = new UnityInput();
-//	}
-	
-	public TitleScene(ContentManager content, GraphicsDeviceManager graphics) {
-		this.graphics = graphics;
-		this.content = content;
+	private UnityInput input;
+
+	public TitleScene(SceneManager manager, ContentManager content, GraphicsDeviceManager graphics) : base(manager, content, graphics) {
+		this.input = new UnityInput();
 	}
 
-	public void Setup(float startTime) {
+	public override void Setup(float startTime) {
 		background = new FullScreenQuad(graphics, content, this, new[] {"bg"});
 		title = new Sprite(graphics, content, this, new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
 		subtitle = new Sprite(graphics, content, this, new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
@@ -60,7 +52,7 @@ public class TitleScene {
 		cycle_title.AddSprite(subtitle);
 	}
 
-	public void Draw() {
+	public override void Draw() {
 		background.Draw();
 		title.Draw();
 		subtitle.Draw();
@@ -69,7 +61,7 @@ public class TitleScene {
 		startButton.Draw();
 	}
 
-	public void Update () {
+	public override void Update () {
 //		var touch = new TouchSensor(input);
 //		
 //		if (touch.insideSprite(Camera.main, buyMusic)) {
@@ -89,7 +81,7 @@ public class TitleScene {
 		cycle_title.Update(Time.time);
 	}
 
-	public void Destroy() {
+	public override void Destroy() {
 		Sprite.Destroy(title);
 		Sprite.Destroy(subtitle);
 		Sprite.Destroy(news);
