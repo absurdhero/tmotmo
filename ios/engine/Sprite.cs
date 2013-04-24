@@ -8,6 +8,7 @@ public class Sprite {
 	protected GraphicsDeviceManager graphics;
 	public Texture2D[] textures;
 	protected Quad quad;
+    private Matrix transform;
 
 	public int height = 0;
 	public int width = 0;
@@ -24,7 +25,8 @@ public class Sprite {
 		}
 		set {
 			_screenPosition = value;
-			quad = new Quad(Camera.main.ScreenToWorldPoint(value), Vector3.Forward, Vector3.Down, width, height);
+            var position = Camera.main.ScreenToWorldPoint(value) + transform.Translation;
+			quad = new Quad(position, Vector3.Forward, Vector3.Down, width, height);
 		}
 	}
 	public Vector3 worldPosition {
@@ -204,7 +206,7 @@ public class Sprite {
 //	/* In viewport space, 0 and 1 are the edges of the screen. */
 	public void setCenterToViewportCoord(float x, float y) {
 		var centeredPosition = snapToPixel(Camera.main.ViewportToWorldPoint(new Vector3(x, y, 0.0f)));
-		worldPosition = new Vector3(centeredPosition.X, centeredPosition.Y, centeredPosition.Z) - new Vector3(Center(), 0);
+		worldPosition = new Vector3(centeredPosition.X, centeredPosition.Y, worldPosition.Z) - new Vector3(Center(), 0);
 	}
 //	
 //	public void setWorldPosition(float x, float y, float z) {
@@ -215,9 +217,11 @@ public class Sprite {
 //		gameObject.transform.position = snapToPixel(pos);
 //	}
 //	
-//	public void setDepth(float z) {
-//		gameObject.transform.Translate(Vector3.back * z);
-//	}
+	public void setDepth(float z) {
+        var position = worldPosition;
+        position.Z = z;
+        worldPosition = position;
+	}
 	
 //	public void move(Vector3 pixels) {
 //		setScreenPosition(getScreenPosition() + pixels);
@@ -247,17 +251,18 @@ public class Sprite {
 //		return parent;		
 //	}
 //
-//	public GameObject createPivotOnCenter() {
-//		var parent = new GameObject("Parent of " + gameObject.name);
-//		copyTransformTo(parent);
-//
-//		// translate the parent 2 times the sprite height.
-//		// implicitly translate the sprite in the opposite direction by the same amount.
-//		parent.transform.Translate(worldWidth / 2f, worldHeight / 2f, 0f);
-//		gameObject.transform.parent = parent.transform;
-//		
-//		return parent;		
-//	}
+	public Matrix createPivotOnCenter() {
+		// translate the parent 2 times the sprite height.
+		// implicitly translate the sprite in the opposite direction by the same amount.
+        Vector3 translation = transform.Translation;
+        translation.X = worldWidth / 2f;
+        translation.Y = worldHeight / 2f;
+        translation.Z = 0f;
+		
+        transform.Translation = translation;
+
+        return transform;
+	}
 //	
 //	public GameObject createPivotOnBottomRightCorner() {
 //		var parent = new GameObject("Parent of " + gameObject.name);
@@ -279,16 +284,16 @@ public class Sprite {
 //		return parent;
 //	}
 //	
-//	private float worldHeight {
-//		// This is multiplied by two because orthographicSize is half the screen height
-//		get { return height / Camera.main.pixelHeight * Camera.main.orthographicSize * 2.0f; }
-//	}
-//	
-//	private float worldWidth {
-//		// This is multiplied by two because orthographicSize is half the screen height
-//		get { return width / Camera.main.pixelWidth * Camera.main.orthographicSize * 2.0f; }
-//	}
-//
+	private float worldHeight {
+		// This is multiplied by two because orthographicSize is half the screen height
+		get { return height / Camera.main.pixelHeight * Camera.main.orthographicSize * 2.0f; }
+	}
+	
+	private float worldWidth {
+		// This is multiplied by two because orthographicSize is half the screen height
+		get { return width / Camera.main.pixelWidth * Camera.main.orthographicSize * 2.0f; }
+	}
+
 	private Vector3 snapToPixel(Vector3 pos) {
 		Vector3 newpos;
 		float pixelRatio = (Camera.main.orthographicSize * 2) / Camera.main.pixelHeight;

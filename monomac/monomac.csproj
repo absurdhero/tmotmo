@@ -124,6 +124,18 @@
     <Compile Include="..\ios\engine\Application.cs">
       <Link>engine\Application.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\Wiggler.cs">
+      <Link>engine\Wiggler.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\DelayedCycler.cs">
+      <Link>engine\DelayedCycler.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Repeater.cs">
+      <Link>engine\Repeater.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\SceneOne.cs">
+      <Link>scenes\SceneOne.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

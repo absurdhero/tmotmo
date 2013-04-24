@@ -13,7 +13,7 @@ public class SceneFactory : MarshalByRefObject {
     ContentManager content;
     GraphicsDeviceManager graphics;
 	
-	Type LAST_SCENE = typeof(TitleScene);
+	Type LAST_SCENE = typeof(SceneOne);
 
 	bool scenesInstantiated = false;
 	Scene[] scenes;
@@ -22,14 +22,14 @@ public class SceneFactory : MarshalByRefObject {
         this.graphics = graphics;
         this.content = content;
 		this.sceneManager = sceneManager;
-		scenes = new Scene[1];
+		scenes = new Scene[2];
 	}
 
 	private void ensureScenesInstantiated() {
 		if (scenesInstantiated) return;
 
 		scenes[0] = new TitleScene(sceneManager, content, graphics);
-//		scenes[1] = new SceneOne(sceneManager);
+		scenes[1] = new SceneOne(sceneManager, content, graphics);
 //		scenes[2] = new SceneTwo(sceneManager);
 //		var sceneTwo = new SceneTwo(sceneManager);
 //		scenes[2] = sceneTwo;

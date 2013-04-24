@@ -13,7 +13,7 @@ public class LoopTracker
 
     public bool IsLoopOver()
     {
-        return false;
+        return true;
     }
 
     public void PlayAll()

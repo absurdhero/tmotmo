@@ -119,6 +119,11 @@
     <Compile Include="engine\UnityInput.cs" />
     <Compile Include="engine\TouchSensor.cs" />
     <Compile Include="engine\Application.cs" />
+    <Compile Include="scenes\SceneOne.cs" />
+    <Compile Include="engine\Repeater.cs" />
+    <Compile Include="engine\Wiggler.cs" />
+    <Compile Include="engine\DelayedCycler.cs" />
+    <Compile Include="engine\SpriteTouchExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -147,6 +152,20 @@
     <BundleResource Include="Content\TitleScene\tmo4.png" />
     <BundleResource Include="Content\TitleScene\tmo5.png" />
     <BundleResource Include="Content\TitleScene\tmo6.png" />
+    <BundleResource Include="Content\SceneOne\bg.png" />
+    <BundleResource Include="Content\SceneOne\circle1.png" />
+    <BundleResource Include="Content\SceneOne\circle2.png" />
+    <BundleResource Include="Content\SceneOne\circle3.png" />
+    <BundleResource Include="Content\SceneOne\circle4.png" />
+    <BundleResource Include="Content\SceneOne\circle5.png" />
+    <BundleResource Include="Content\SceneOne\notsame.png" />
+    <BundleResource Include="Content\SceneOne\notsame_caps.png" />
+    <BundleResource Include="Content\SceneOne\notsame_g1.png" />
+    <BundleResource Include="Content\SceneOne\notsame_g2.png" />
+    <BundleResource Include="Content\SceneOne\same.png" />
+    <BundleResource Include="Content\SceneOne\triangle1.png" />
+    <BundleResource Include="Content\SceneOne\triangle2.png" />
+    <BundleResource Include="Content\SceneOne\triangle3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,6 +16,11 @@ public class Application
         // do nothing on other builds
         #endif
     }
+
+    public static void Vibrate()
+    {
+
+    }
 }
 
 

@@ -38,9 +38,9 @@ public class TitleScene : Scene {
 		
 		// add blinking start text below title but don't display it yet
 		startButton.setCenterToViewportCoord(0.5f, 0.4f);
-		startButton.visible(false);
+        startButton.visible(false);
 		
-//		// place buttons in the bottom corners
+		// place buttons in the bottom corners
 		news.screenPosition = new Vector3(4, camera.pixelHeight - news.height - 4, 0);
 		buyMusic.screenPosition = new Vector3(camera.pixelWidth - buyMusic.PixelWidth() - 4, camera.pixelHeight - buyMusic.height - 4, 0);
 		
