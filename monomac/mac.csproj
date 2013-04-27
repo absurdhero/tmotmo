@@ -10,7 +10,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>monomac</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-    <AssemblyName>monomac</AssemblyName>
+    <AssemblyName>mac</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
