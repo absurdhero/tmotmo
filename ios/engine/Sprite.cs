@@ -8,7 +8,6 @@ public class Sprite {
 	protected GraphicsDeviceManager graphics;
 	public Texture2D[] textures;
 	protected Quad quad;
-    private bool recalculateMesh = true;
 
     private Transform _transform = new Transform();
     public Transform transform {
@@ -17,7 +16,6 @@ public class Sprite {
         }
         set {
             _transform = value;
-            recalculateMesh = true;
         }
     }
 
@@ -37,7 +35,6 @@ public class Sprite {
 		}
 		set {
 			_screenPosition = value;
-            recalculateMesh = true;
 		}
 	}
 	public Vector3 worldPosition {
@@ -97,11 +94,8 @@ public class Sprite {
 	public void Draw()
 	{
 		if (isVisible) {
-            if (recalculateMesh) {
-                createMesh();
-                recalculateMesh = false;
-            }
-            
+            createMesh();
+
             var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
 
 			quadEffect.World = Camera.main.world;

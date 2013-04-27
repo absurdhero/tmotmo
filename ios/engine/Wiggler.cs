@@ -70,7 +70,7 @@ class Wiggler : Repeater {
 
                 var pivot = centerPivots[sprite];
                 pivot.localMatrix.Decompose(out scale, out rotation, out translation);
-                pivot.localRotate(ref backward, -totalRotation);
+                pivot.localRotate(backward, -totalRotation);
 			}
 			totalRotation = 0f;
 			zoomOut();

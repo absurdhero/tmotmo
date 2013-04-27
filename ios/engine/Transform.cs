@@ -85,7 +85,7 @@ public class Transform
         localMatrix = Matrix.CreateFromQuaternion(rotation) * localMatrix;
     }
 
-    public void localRotate(ref Vector3 backward, float angle) {
+    public void localRotate(Vector3 backward, float angle) {
         Quaternion rotation;
         Quaternion.CreateFromAxisAngle(ref backward, -angle, out rotation);
         localRotate(rotation);
