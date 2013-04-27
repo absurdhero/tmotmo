@@ -53,12 +53,13 @@
       <DependentUpon>CameraTests.cs</DependentUpon>
     </Compile>
     <Compile Include="SpriteTests.cs" />
+    <Compile Include="TransformTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\monomac\monomac.csproj">
+    <ProjectReference Include="..\monomac\mac.csproj">
       <Project>{82567571-2A39-44AA-A4F9-C1CB2B5AA365}</Project>
-      <Name>monomac</Name>
+      <Name>mac</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

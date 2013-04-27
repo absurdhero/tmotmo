@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 class Wiggler : Repeater {
-	protected Dictionary<Sprite, Matrix> centerPivots;
+	protected Dictionary<Sprite, Transform> centerPivots;
     Dictionary<Sprite, Vector3> initialScales;
 	float sceneStart;
 	float sceneLength;
@@ -13,11 +13,11 @@ class Wiggler : Repeater {
 	protected const int zoomTicks = 5;
 	protected const int wiggleTicks = 15;
 
-    private static Dictionary<Sprite, Matrix> pivotsFromSprite(Sprite[] sprites) {
-        var pivots = new Dictionary<Sprite, Matrix>();
+    private static Dictionary<Sprite, Transform> pivotsFromSprite(Sprite[] sprites) {
+        var pivots = new Dictionary<Sprite, Transform>();
 
         foreach (var sprite in sprites) {
-            // sets the transform matrix on the sprite and copy of it
+            // sets the transform matrix to be centered
             pivots.Add(sprite, sprite.createPivotOnCenter());
         }
 		return pivots;
@@ -29,7 +29,7 @@ class Wiggler : Repeater {
 	public Wiggler(float startTime, float sceneLength, Sprite[] sprites) :
 	this(startTime, sceneLength, pivotsFromSprite(sprites)) {}
 
-    public Wiggler(float startTime, float sceneLength, Dictionary<Sprite, Matrix> centerPivots) : base(0.05f, 0, startTime) {
+    public Wiggler(float startTime, float sceneLength, Dictionary<Sprite, Transform> centerPivots) : base(0.05f, 0, startTime) {
 		sceneStart = startTime;
 		this.sceneLength = sceneLength;
 		this.centerPivots = centerPivots;
@@ -40,7 +40,7 @@ class Wiggler : Repeater {
             Vector3 scale;
             Quaternion rotation;
             Vector3 translation;
-            centerPivots[sprite].Decompose(out scale, out rotation, out translation);
+            centerPivots[sprite].worldMatrix.Decompose(out scale, out rotation, out translation);
 			initialScales.Add(sprite, scale);
 		}
 
@@ -49,6 +49,8 @@ class Wiggler : Repeater {
 	}
 	
 	public override void OnTick() {
+        Vector3 backward = Vector3.Backward;
+
 		float time = Time.time;
 		if (time - sceneStart >= sceneLength && (time - sceneStart) % sceneLength <= interval) {
 			wiggleNow(time);
@@ -65,10 +67,10 @@ class Wiggler : Repeater {
                 Vector3 scale;
                 Quaternion rotation;
                 Vector3 translation;
-                centerPivots[sprite].Decompose(out scale, out rotation, out translation);
-                
-//				pivot.transform.Rotate(Vector3.back, -totalRotation, Space.Self);
-                // XXX need to update the matrix on the sprite
+
+                var pivot = centerPivots[sprite];
+                pivot.localMatrix.Decompose(out scale, out rotation, out translation);
+                pivot.localRotate(ref backward, -totalRotation);
 			}
 			totalRotation = 0f;
 			zoomOut();
@@ -84,10 +86,11 @@ class Wiggler : Repeater {
 	}
 	
 	public void Destroy() {
-		foreach(var pivot in centerPivots) {
-			// GameObject.Destroy also destroys children so we must detach each Sprite from its pivot
-//			pivot.transform.DetachChildren();
-//			GameObject.Destroy(pivot);
+		foreach(var sprite in centerPivots.Keys) {
+            // fix up the scale
+            centerPivots[sprite].localScale(1);
+            // remove the wiggly parent transform
+            sprite.transform.removeImmediateParent();
 		}
 	}
 	
@@ -101,18 +104,29 @@ class Wiggler : Repeater {
 	}
 	
 	private void zoomFor(int tick) {
-		foreach(var sprite in centerPivots) {
-//			centerPivots[sprite].transform.localScale = initialScales[sprite] * (1f + tick / (float) zoomTicks / 24f);
+        return;
+		foreach(var sprite in centerPivots.Keys) {
+            centerPivots[sprite].localScale(1f + tick / (float) zoomTicks / 24f);
 		}
 	}
 	
 	virtual protected void wiggle() {
-//		float angle = -Mathf.PingPong(currentTick - zoomTicks / 64f * Mathf.PI, Mathf.PI / 16f);
-//		totalRotation += angle;
-//		foreach(var pivot in centerPivots) {
-//			pivot.transform.Rotate(Vector3.back, angle, Space.Self);
-//		}
+		float angle = -pingPong(currentTick - zoomTicks / 64f * MathHelper.Pi, MathHelper.Pi / 16f);
+		totalRotation += angle;
+        Matrix rotation = Matrix.CreateRotationZ(totalRotation);
+		foreach(var sprite in centerPivots.Keys) {
+            centerPivots[sprite].localMatrix = rotation * centerPivots[sprite].localMatrix;
+		}
 	}
+
+    protected float pingPong(float t, float length) {
+        float p = t % (length * 2);
+        if (p > length) {
+            return t - (p - t);
+        } else {
+            return p - t;
+        }
+    }
 }
 
 class ReverseWiggler : Wiggler {
@@ -122,14 +136,15 @@ class ReverseWiggler : Wiggler {
 	public ReverseWiggler(float startTime, float sceneLength, Sprite[] sprites) :
 	base(startTime, sceneLength, sprites) {}
 
-	public ReverseWiggler(float startTime, float sceneLength, Dictionary<Sprite, Matrix> centerPivots) :
+    public ReverseWiggler(float startTime, float sceneLength, Dictionary<Sprite, Transform> centerPivots) :
 	base(startTime, sceneLength, centerPivots) {}
    
 	override protected void wiggle() {
-//		float angle = Mathf.PingPong(currentTick - zoomTicks / 64f * Mathf.PI, Mathf.PI / 16f);
-//		totalRotation += angle;
-//		foreach(var pivot in centerPivots) {
-//			pivot.transform.Rotate(Vector3.back, angle, Space.Self);
-//		}
+		float angle = pingPong(currentTick - zoomTicks / 64f * MathHelper.Pi, MathHelper.Pi / 16f);
+		totalRotation += angle;
+        Matrix rotation = Matrix.CreateRotationZ(totalRotation);
+        foreach(var sprite in centerPivots.Keys) {
+            centerPivots[sprite].localMatrix = rotation * centerPivots[sprite].localMatrix;
+        }
 	}
 }

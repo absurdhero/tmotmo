@@ -30,10 +30,8 @@ namespace TexturedQuad
 		public Vector3 Right;
 
 		public VertexPositionNormalTexture[] Vertices;
-		//        public int[] Indexes;
 		public short[] Indexes;
-		
-		
+				
 		public Quad( Vector3 origin, Vector3 normal, Vector3 up, 
 		            float width, float height )
 		{
@@ -44,7 +42,7 @@ namespace TexturedQuad
 			Up = up;
 			
 			// Calculate the quad corners
-			Right = Vector3.Cross (-normal, Up);
+			Right = Vector3.Cross (-Normal, Up);
 			UpperLeft = Origin;
 			UpperRight = Origin + Right * width;
 			LowerLeft = UpperLeft - (Up * height);

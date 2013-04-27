@@ -124,6 +124,7 @@
     <Compile Include="engine\Wiggler.cs" />
     <Compile Include="engine\DelayedCycler.cs" />
     <Compile Include="engine\SpriteTouchExtensions.cs" />
+    <Compile Include="engine\Transform.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

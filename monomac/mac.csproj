@@ -136,6 +136,9 @@
     <Compile Include="..\ios\scenes\SceneOne.cs">
       <Link>scenes\SceneOne.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\Transform.cs">
+      <Link>engine\Transform.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ios", "ios\ios.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests-mac", "tests-mac\tests-mac.csproj", "{BB8AE2C1-27C5-4F4F-A29E-E4500B122EDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monomac", "monomac\monomac.csproj", "{82567571-2A39-44AA-A4F9-C1CB2B5AA365}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mac", "monomac\mac.csproj", "{82567571-2A39-44AA-A4F9-C1CB2B5AA365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

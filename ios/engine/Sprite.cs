@@ -8,7 +8,18 @@ public class Sprite {
 	protected GraphicsDeviceManager graphics;
 	public Texture2D[] textures;
 	protected Quad quad;
-    private Matrix transform;
+    private bool recalculateMesh = true;
+
+    private Transform _transform = new Transform();
+    public Transform transform {
+        get {
+            return _transform;
+        }
+        set {
+            _transform = value;
+            recalculateMesh = true;
+        }
+    }
 
 	public int height = 0;
 	public int width = 0;
@@ -18,6 +29,7 @@ public class Sprite {
 
 	private bool isVisible = true;
 
+
 	private Vector3 _screenPosition;
 	public Vector3 screenPosition {
 		get {
@@ -25,8 +37,7 @@ public class Sprite {
 		}
 		set {
 			_screenPosition = value;
-            var position = Camera.main.ScreenToWorldPoint(value) + transform.Translation;
-			quad = new Quad(position, Vector3.Forward, Vector3.Down, width, height);
+            recalculateMesh = true;
 		}
 	}
 	public Vector3 worldPosition {
@@ -58,7 +69,7 @@ public class Sprite {
 		Texture2D[] textures = new Texture2D[texturePaths.Length];
 		for (int i = 0; i < texturePaths.Length; i++) {
 			textures [i] = content.Load<Texture2D> (texturePaths [i]);
-			System.Console.WriteLine("loaded " + texturePaths[i] + " as " + textures[i]);
+			System.Console.WriteLine("loaded texture " + texturePaths[i]);
 		}
 		return textures;
 	}
@@ -75,19 +86,23 @@ public class Sprite {
 
 		width = textures[0].Width;
 		height = textures[0].Height;
-
-		createMesh();
 	}
 
 	virtual protected void createMesh()
 	{
-		quad = new Quad (Vector3.Zero, Vector3.Forward, Vector3.Down, width, height);
+        var position = Camera.main.ScreenToWorldPoint(_screenPosition);
+        quad = new Quad(position + transform.Translation, transform.Forward, transform.Down, width, height);
 	}
 
 	public void Draw()
 	{
 		if (isVisible) {
-			var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
+            if (recalculateMesh) {
+                createMesh();
+                recalculateMesh = false;
+            }
+            
+            var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
 
 			quadEffect.World = Camera.main.world;
 			quadEffect.View = Camera.main.view;
@@ -251,17 +266,23 @@ public class Sprite {
 //		return parent;		
 //	}
 //
-	public Matrix createPivotOnCenter() {
-		// translate the parent 2 times the sprite height.
-		// implicitly translate the sprite in the opposite direction by the same amount.
+    public Transform createPivotOnCenter() {
+        Transform pivot = new Transform();
+		// translate 2 times the sprite height.
         Vector3 translation = transform.Translation;
         translation.X = worldWidth / 2f;
         translation.Y = worldHeight / 2f;
         translation.Z = 0f;
 		
+        // move the pivot in the other direction
         transform.Translation = translation;
+        pivot.Translation = - translation;
 
-        return transform;
+        // insert the pivot as a parent
+        pivot.parent = transform.parent;
+        transform.parent = pivot;
+
+        return pivot;
 	}
 //	
 //	public GameObject createPivotOnBottomRightCorner() {
