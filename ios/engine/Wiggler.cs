@@ -115,7 +115,7 @@ class Wiggler : Repeater {
 		totalRotation += angle;
         Matrix rotation = Matrix.CreateRotationZ(totalRotation);
 		foreach(var sprite in centerPivots.Keys) {
-            centerPivots[sprite].localMatrix = rotation * centerPivots[sprite].localMatrix;
+            centerPivots[sprite].localRotate(rotation);
 		}
 	}
 
@@ -144,7 +144,7 @@ class ReverseWiggler : Wiggler {
 		totalRotation += angle;
         Matrix rotation = Matrix.CreateRotationZ(totalRotation);
         foreach(var sprite in centerPivots.Keys) {
-            centerPivots[sprite].localMatrix = rotation * centerPivots[sprite].localMatrix;
+            centerPivots[sprite].localRotate(rotation);
         }
 	}
 }

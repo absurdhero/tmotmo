@@ -42,7 +42,6 @@ public class Transform
     public Vector3 Translation
     {
         get {
-            Debug.Log("translation " + worldMatrix.Translation);
             return worldMatrix.Translation;
         }
         set {
@@ -83,6 +82,11 @@ public class Transform
     public void localRotate(Quaternion rotation)
     {
         localMatrix = Matrix.CreateFromQuaternion(rotation) * localMatrix;
+    }
+
+    public void localRotate(Matrix rotationMatrix)
+    {
+        localMatrix = rotationMatrix * localMatrix;
     }
 
     public void localRotate(Vector3 backward, float angle) {

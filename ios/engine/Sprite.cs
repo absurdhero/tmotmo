@@ -265,12 +265,12 @@ public class Sprite {
 		// translate 2 times the sprite height.
         Vector3 translation = transform.Translation;
         translation.X = worldWidth / 2f;
-        translation.Y = worldHeight / 2f;
+        translation.Y = -worldHeight / 2f;
         translation.Z = 0f;
 		
         // move the pivot in the other direction
-        transform.Translation = translation;
-        pivot.Translation = - translation;
+        transform.localTranslation = -translation;
+        pivot.localTranslation = translation;
 
         // insert the pivot as a parent
         pivot.parent = transform.parent;
