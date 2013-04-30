@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 public class Wiggler : Repeater {
 	protected Dictionary<Sprite, Transform> centerPivots;
-    Dictionary<Sprite, Vector3> initialScales;
+    Dictionary<Transform, Vector3> initialScales;
 	float sceneStart;
 	float sceneLength;
 	protected float totalRotation;
@@ -35,13 +35,9 @@ public class Wiggler : Repeater {
 		this.centerPivots = centerPivots;
 
 		// preserve the scale of each pivot
-		initialScales = new Dictionary<Sprite, Vector3>();
+		initialScales = new Dictionary<Transform, Vector3>();
 		foreach(var sprite in centerPivots.Keys) {
-            Vector3 scale;
-            Quaternion rotation;
-            Vector3 translation;
-            centerPivots[sprite].worldMatrix.Decompose(out scale, out rotation, out translation);
-			initialScales.Add(sprite, scale);
+			initialScales.Add(centerPivots[sprite], centerPivots[sprite].localScale);
 		}
 
 		doWiggle = false;
@@ -79,8 +75,6 @@ public class Wiggler : Repeater {
 	
 	public void Destroy() {
 		foreach(var sprite in centerPivots.Keys) {
-            // fix up the scale
-            //sprite.localTransform.localScale(1);
             // remove the wiggly parent transform
             sprite.localTransform.removeImmediateParent();
 		}
@@ -96,9 +90,8 @@ public class Wiggler : Repeater {
 	}
 	
 	private void zoomFor(int tick) {
-        return;
 		foreach(var sprite in centerPivots.Keys) {
-            sprite.localTransform.localScale(1f + tick / (float) zoomTicks / 24f);
+            centerPivots[sprite].localScale = initialScales[centerPivots[sprite]] * (1f + tick / (float) zoomTicks / 24f);
 		}
 	}
 	

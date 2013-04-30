@@ -79,29 +79,33 @@ public class Transform
         get { return worldMatrix.Right; }
     }
 
-    public void setLocalRotation(Quaternion rotation)
+    public void rotateLocal(Quaternion rotation)
     {
         localMatrix = Matrix.CreateFromQuaternion(rotation) * localMatrix;
     }
 
-    public void setLocalRotation(Matrix rotationMatrix)
+    public void rotateLocal(Matrix rotationMatrix)
     {
         localMatrix = rotationMatrix * localMatrix;
     }
 
-    public void setLocalRotation(Vector3 backward, float angle) {
-        Quaternion rotation;
-        Quaternion.CreateFromAxisAngle(ref backward, -angle, out rotation);
-        setLocalRotation(rotation);
-    }
-
-    public void localScale(float scaleValue)
-    {
-        localMatrix = Matrix.CreateScale(scaleValue) * localMatrix;
-    }
-
     public void rotateLocal(Vector3 backward, float angle) {
-        localMatrix = Matrix.CreateFromAxisAngle(backward, angle) * localMatrix;
+        rotateLocal(Matrix.CreateFromAxisAngle(backward, angle));
     }
+
+    public Vector3 localScale
+    {
+        get {
+            Vector3 scale;
+            Quaternion rotation;
+            Vector3 translation;
+            localMatrix.Decompose(out scale, out rotation, out translation);
+            return scale;
+        }
+        set {
+            localMatrix = Matrix.CreateScale(value);
+        }
+    }
+
 }
 
