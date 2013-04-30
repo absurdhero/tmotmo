@@ -49,7 +49,7 @@ namespace tests
 
             var rotationMatrix = Matrix.CreateRotationZ(1);
 
-            parent.localRotate(rotationMatrix);
+            parent.localRotation(rotationMatrix);
 
             Assert.That(Matrix.ToFloatArray(child.worldMatrix), Is.EqualTo(Matrix.ToFloatArray(rotationMatrix)).Within(0.000001));
         }
@@ -64,7 +64,7 @@ namespace tests
             child.localTranslation = -center;
             parent.localTranslation = center;
 
-            parent.localRotate(flipUpsideDown);
+            parent.localRotation(flipUpsideDown);
             
             assertVectorsEqual(Vector3.Transform(Vector3.Zero, child.worldMatrix), new Vector3(2, -2, 0));
         }
@@ -78,7 +78,7 @@ namespace tests
             var center = new Vector3(1, -1, 0);
             child.localTranslation = center;
 
-            parent.localRotate(flipUpsideDown);
+            parent.localRotation(flipUpsideDown);
             
             assertVectorsEqual(Vector3.Transform(Vector3.Zero, child.worldMatrix), new Vector3(-1, 1, 0));
         }
@@ -90,7 +90,7 @@ namespace tests
             var center = new Vector3(1, -1, 0);
             child.localTranslation = center;
             
-            child.localRotate(Quaternion.CreateFromRotationMatrix(flipUpsideDown));
+            child.localRotation(Quaternion.CreateFromRotationMatrix(flipUpsideDown));
             
             var transformed = Vector3.Transform(center, child.worldMatrix);
             assertVectorsEqual(transformed, Vector3.Zero);

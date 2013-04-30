@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-class Wiggler : Repeater {
+public class Wiggler : Repeater {
 	protected Dictionary<Sprite, Transform> centerPivots;
     Dictionary<Sprite, Vector3> initialScales;
 	float sceneStart;
@@ -49,9 +49,7 @@ class Wiggler : Repeater {
 	}
 	
 	public override void OnTick() {
-        Vector3 backward = Vector3.Backward;
-
-		float time = Time.time;
+        float time = Time.time;
 		if (time - sceneStart >= sceneLength && (time - sceneStart) % sceneLength <= interval) {
 			wiggleNow(time);
 		}
@@ -64,13 +62,7 @@ class Wiggler : Repeater {
 			wiggle();
 		} else if (currentTick < zoomTicks + wiggleTicks + zoomTicks) {
 			foreach(var sprite in centerPivots.Keys) {
-                Vector3 scale;
-                Quaternion rotation;
-                Vector3 translation;
-
-                var pivot = centerPivots[sprite];
-                pivot.localMatrix.Decompose(out scale, out rotation, out translation);
-                pivot.localRotate(backward, -totalRotation);
+                centerPivots[sprite].rotateLocal(Vector3.Backward, -totalRotation);
 			}
 			totalRotation = 0f;
 			zoomOut();
@@ -88,9 +80,9 @@ class Wiggler : Repeater {
 	public void Destroy() {
 		foreach(var sprite in centerPivots.Keys) {
             // fix up the scale
-            centerPivots[sprite].localScale(1);
+            //sprite.localTransform.localScale(1);
             // remove the wiggly parent transform
-            sprite.transform.removeImmediateParent();
+            sprite.localTransform.removeImmediateParent();
 		}
 	}
 	
@@ -106,25 +98,24 @@ class Wiggler : Repeater {
 	private void zoomFor(int tick) {
         return;
 		foreach(var sprite in centerPivots.Keys) {
-            centerPivots[sprite].localScale(1f + tick / (float) zoomTicks / 24f);
+            sprite.localTransform.localScale(1f + tick / (float) zoomTicks / 24f);
 		}
 	}
 	
 	virtual protected void wiggle() {
-		float angle = -pingPong(currentTick - zoomTicks / 64f * MathHelper.Pi, MathHelper.Pi / 16f);
+		float angle = -pingPong(currentTick / MathHelper.Pi / 2f - zoomTicks / 32f, 1 / 32f);
 		totalRotation += angle;
-        Matrix rotation = Matrix.CreateRotationZ(totalRotation);
 		foreach(var sprite in centerPivots.Keys) {
-            centerPivots[sprite].localRotate(rotation);
+            centerPivots[sprite].rotateLocal(Vector3.Backward, angle);
 		}
 	}
 
-    protected float pingPong(float t, float length) {
+    static public float pingPong(float t, float length) {
         float p = t % (length * 2);
         if (p > length) {
-            return t - (p - t);
+            return length - (p - length);
         } else {
-            return p - t;
+            return p;
         }
     }
 }
@@ -142,9 +133,8 @@ class ReverseWiggler : Wiggler {
 	override protected void wiggle() {
 		float angle = pingPong(currentTick - zoomTicks / 64f * MathHelper.Pi, MathHelper.Pi / 16f);
 		totalRotation += angle;
-        Matrix rotation = Matrix.CreateRotationZ(totalRotation);
         foreach(var sprite in centerPivots.Keys) {
-            centerPivots[sprite].localRotate(rotation);
+            centerPivots[sprite].rotateLocal(Vector3.Backward, angle);
         }
 	}
 }

@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="SpriteTests.cs" />
     <Compile Include="TransformTest.cs" />
+    <Compile Include="WigglerTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

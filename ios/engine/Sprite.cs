@@ -9,15 +9,8 @@ public class Sprite {
 	public Texture2D[] textures;
 	protected Quad quad;
 
-    private Transform _transform = new Transform();
-    public Transform transform {
-        get {
-            return _transform;
-        }
-        set {
-            _transform = value;
-        }
-    }
+    private Transform worldTransform;
+    public Transform localTransform;
 
 	public int height = 0;
 	public int width = 0;
@@ -27,25 +20,25 @@ public class Sprite {
 
 	private bool isVisible = true;
 
-
-	private Vector3 _screenPosition;
 	public Vector3 screenPosition {
 		get {
-			return _screenPosition;
+            return Camera.main.WorldToScreenPoint(localTransform.Translation);
 		}
 		set {
-			_screenPosition = value;
-		}
-	}
-	public Vector3 worldPosition {
-		get {
-			return Camera.main.ScreenToWorldPoint(screenPosition);
-		}
-		set {
-			screenPosition = Camera.main.WorldToScreenPoint(value);
+            worldTransform.Translation = Camera.main.ScreenToWorldPoint(value) - localTransform.Translation;
 		}
 	}
 
+	public Vector3 worldPosition {
+		get {
+            return localTransform.Translation;
+		}
+		set {
+            worldTransform.Translation = value  - localTransform.Translation;
+            Debug.Log(worldTransform.localMatrix);
+            Debug.Log(localTransform.localMatrix);
+        }
+	}
 
 	/// Destroys the underlying GameObject
 	public static void Destroy(Sprite sprite) {
@@ -83,12 +76,15 @@ public class Sprite {
 
 		width = textures[0].Width;
 		height = textures[0].Height;
+
+        localTransform = new Transform();
+        worldTransform = new Transform();
+        localTransform.parent = worldTransform;
 	}
 
 	virtual protected void createMesh()
 	{
-        var position = Camera.main.ScreenToWorldPoint(_screenPosition);
-        quad = new Quad(position + transform.Translation, transform.Forward, transform.Down, width, height);
+        quad = new Quad(localTransform.Translation, localTransform.Forward, localTransform.Down, width, height);
 	}
 
 	public void Draw()
@@ -263,18 +259,18 @@ public class Sprite {
     public Transform createPivotOnCenter() {
         Transform pivot = new Transform();
 		// translate 2 times the sprite height.
-        Vector3 translation = transform.Translation;
+        Vector3 translation = localTransform.Translation;
         translation.X = worldWidth / 2f;
         translation.Y = -worldHeight / 2f;
         translation.Z = 0f;
 		
         // move the pivot in the other direction
-        transform.localTranslation = -translation;
+        localTransform.localTranslation = -translation;
         pivot.localTranslation = translation;
 
         // insert the pivot as a parent
-        pivot.parent = transform.parent;
-        transform.parent = pivot;
+        pivot.parent = localTransform.parent;
+        localTransform.parent = pivot;
 
         return pivot;
 	}
