@@ -15,16 +15,16 @@ namespace tests
         {
             Transform transform = new Transform();
             Assert.That(transform.localMatrix, Is.EqualTo(Matrix.Identity));
-			Assert.That(transform.worldMatrix, Is.EqualTo(Matrix.Identity));
-		}
+            Assert.That(transform.worldMatrix, Is.EqualTo(Matrix.Identity));
+        }
 
-		[Test]
-		public void localAndWorldTranslationAreEqualWhenParentUnset()
-		{
-			Transform transform = new Transform();
+        [Test]
+        public void localAndWorldTranslationAreEqualWhenParentUnset()
+        {
+            Transform transform = new Transform();
 
             transform.localTranslation = anyTranslation;
-			Assert.That (transform.Translation, Is.EqualTo(anyTranslation));
+            Assert.That(transform.Translation, Is.EqualTo(anyTranslation));
             Assert.That(transform.localMatrix, Is.EqualTo(transform.worldMatrix));
         }
 
@@ -38,11 +38,12 @@ namespace tests
             child.localTranslation = anyTranslation;
             parent.localTranslation = anyTranslation;
 
-            Assert.That (child.Translation, Is.EqualTo(anyTranslation + anyTranslation));
+            Assert.That(child.Translation, Is.EqualTo(anyTranslation + anyTranslation));
         }
 
         [Test]
-        public void childRotatesWhenParentIsRotated() {
+        public void childRotatesWhenParentIsRotated()
+        {
             var child = new Transform();
             var parent = new Transform();
             child.parent = parent;
@@ -55,7 +56,8 @@ namespace tests
         }
 
         [Test]
-        public void childRotatesAroundCenterWhenTurningUpsideDown() {
+        public void childRotatesAroundCenterWhenTurningUpsideDown()
+        {
             var child = new Transform();
             var parent = new Transform();
             child.parent = parent;
@@ -70,21 +72,37 @@ namespace tests
         }
 
         [Test]
-        public void parentRotatedAndThenChildIsTranslated() {
+        public void childIsTranslatedAndThenParentIsRotated()
+        {
             var child = new Transform();
             var parent = new Transform();
             child.parent = parent;
 
-            var center = new Vector3(1, -1, 0);
-            child.localTranslation = center;
+            var translation = new Vector3(1, -1, 0);
+            child.localTranslation = translation;
 
             parent.rotateLocal(flipUpsideDown);
             
-            assertVectorEquals(Vector3.Transform(Vector3.Zero, child.worldMatrix), new Vector3(-1, 1, 0));
+            assertVectorEquals(Vector3.Transform(Vector3.Zero, child.worldMatrix), -translation);
+        }
+
+        public void childIsRotatedAndThenParentIsTranslated()
+        {
+            var child = new Transform();
+            var parent = new Transform();
+            child.parent = parent;
+            
+            var translation = new Vector3(1, -1, 0);
+
+            parent.localTranslation = translation;
+            child.rotateLocal(flipUpsideDown);
+
+            assertVectorEquals(Vector3.Transform(Vector3.Zero, child.worldMatrix), translation);
         }
 
         [Test]
-        public void rotationHappensBeforeTranslation() {
+        public void rotationHappensBeforeTranslation()
+        {
             var child = new Transform();
 
             var center = new Vector3(1, -1, 0);
@@ -97,7 +115,8 @@ namespace tests
         }
 
         [Test]
-        public void rotationDoubledWhenRotateCalledTwice() {
+        public void rotationDoubledWhenRotateCalledTwice()
+        {
             var transform = new Transform();
             
             transform.rotateLocal(Vector3.Backward, 1);
@@ -106,7 +125,8 @@ namespace tests
         }
 
         [Test]
-        public void getScaleEqualsSetScale() {
+        public void getScaleEqualsSetScale()
+        {
             var transform = new Transform();
             var newScale = new Vector3(10f);
             transform.localScale = newScale;
@@ -114,7 +134,8 @@ namespace tests
         }
 
         [Test]
-        public void scaleIsTheSameWhenSettingScaleTwice() {
+        public void scaleIsTheSameWhenSettingScaleTwice()
+        {
             var transform = new Transform();
             var newScale = new Vector3(10f);
             transform.localScale = newScale;

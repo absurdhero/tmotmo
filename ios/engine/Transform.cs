@@ -39,6 +39,7 @@ public class Transform
         // now remove the parent from the picture
         parent = parent.parent;
     }
+
     public Vector3 Translation
     {
         get {
