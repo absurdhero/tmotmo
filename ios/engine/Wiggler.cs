@@ -76,7 +76,7 @@ public class Wiggler : Repeater {
 	public void Destroy() {
 		foreach(var sprite in centerPivots.Keys) {
             // remove the wiggly parent transform
-            sprite.localTransform.removeImmediateParent();
+            sprite.transform.removeImmediateParent();
 		}
 	}
 	
@@ -100,7 +100,7 @@ public class Wiggler : Repeater {
 		totalRotation += angle;
 		foreach(var sprite in centerPivots.Keys) {
             centerPivots[sprite].rotateLocal(Vector3.Backward, angle);
-		}
+        }
 	}
 
     static public float pingPong(float t, float length) {

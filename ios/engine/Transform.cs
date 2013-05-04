@@ -104,9 +104,29 @@ public class Transform
             return scale;
         }
         set {
-            localMatrix = Matrix.CreateScale(value);
+            Vector3 scale;
+            Quaternion rotation;
+            Vector3 translation;
+            localMatrix.Decompose(out scale, out rotation, out translation);
+
+            localMatrix = Matrix.CreateScale(value) * Matrix.CreateFromQuaternion(rotation) * Matrix.CreateTranslation(translation);
         }
     }
 
+    public Transform createPivotAtOffset(float x, float y) {
+        var pivot = new Transform();
+
+        var translation = new Vector3(x, y, 0f);
+
+        // move the pivot in the other direction
+        pivot.localTranslation = translation + localTranslation;
+        localTranslation = -translation;
+        
+        // insert the pivot as a parent
+        pivot.parent = this.parent;
+        this.parent = pivot;
+        
+        return pivot;
+    }
 }
 

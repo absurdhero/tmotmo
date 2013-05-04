@@ -9,8 +9,7 @@ public class Sprite {
 	public Texture2D[] textures;
 	protected Quad quad;
 
-    private Transform worldTransform;
-    public Transform localTransform;
+    public Transform transform;
 
 	public int height = 0;
 	public int width = 0;
@@ -22,21 +21,19 @@ public class Sprite {
 
 	public Vector3 screenPosition {
 		get {
-            return Camera.main.WorldToScreenPoint(localTransform.Translation);
+            return Camera.main.WorldToScreenPoint(transform.Translation);
 		}
 		set {
-            worldTransform.Translation = Camera.main.ScreenToWorldPoint(value) - localTransform.Translation;
+            transform.Translation = Camera.main.ScreenToWorldPoint(value) - transform.Translation;
 		}
 	}
 
 	public Vector3 worldPosition {
 		get {
-            return localTransform.Translation;
+            return transform.Translation;
 		}
 		set {
-            worldTransform.Translation = value  - localTransform.Translation;
-            Debug.Log(worldTransform.localMatrix);
-            Debug.Log(localTransform.localMatrix);
+            transform.Translation = value  - transform.Translation;
         }
 	}
 
@@ -77,14 +74,12 @@ public class Sprite {
 		width = textures[0].Width;
 		height = textures[0].Height;
 
-        localTransform = new Transform();
-        worldTransform = new Transform();
-        localTransform.parent = worldTransform;
+        transform = new Transform();
 	}
 
 	virtual protected void createMesh()
 	{
-        quad = new Quad(localTransform.Translation, localTransform.Forward, localTransform.Down, width, height);
+        quad = new Quad(transform.Translation, transform.Forward, transform.Down, width, height);
 	}
 
 	public void Draw()
@@ -257,22 +252,7 @@ public class Sprite {
 //	}
 //
     public Transform createPivotOnCenter() {
-        Transform pivot = new Transform();
-		// translate 2 times the sprite height.
-        Vector3 translation = localTransform.Translation;
-        translation.X = worldWidth / 2f;
-        translation.Y = -worldHeight / 2f;
-        translation.Z = 0f;
-		
-        // move the pivot in the other direction
-        localTransform.localTranslation = -translation;
-        pivot.localTranslation = translation;
-
-        // insert the pivot as a parent
-        pivot.parent = localTransform.parent;
-        localTransform.parent = pivot;
-
-        return pivot;
+        return transform.createPivotAtOffset(worldWidth / 2f, -worldHeight / 2f);
 	}
 //	
 //	public GameObject createPivotOnBottomRightCorner() {
@@ -296,13 +276,11 @@ public class Sprite {
 //	}
 //	
 	private float worldHeight {
-		// This is multiplied by two because orthographicSize is half the screen height
-		get { return height / Camera.main.pixelHeight * Camera.main.orthographicSize * 2.0f; }
+        get { return Camera.main.ScreenToWorldPoint(new Vector3(0f, height, 0f)).Y; }
 	}
 	
 	private float worldWidth {
-		// This is multiplied by two because orthographicSize is half the screen height
-		get { return width / Camera.main.pixelWidth * Camera.main.orthographicSize * 2.0f; }
+        get { return Camera.main.ScreenToWorldPoint(new Vector3(width, 0f, 0f)).X; }
 	}
 
 	private Vector3 snapToPixel(Vector3 pos) {

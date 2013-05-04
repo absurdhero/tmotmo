@@ -8,12 +8,20 @@ namespace tests
     public class TransformTest
     {
         readonly Vector3 anyTranslation = new Vector3(1f, 1f, 0f);
+        float nonZero = 10f;
+       
         Matrix flipUpsideDown = Matrix.CreateRotationZ(MathHelper.Pi);
+
+        Transform transform;
+
+        [SetUp]
+        public void initializeTransform() {
+            transform = new Transform();
+        }
 
         [Test]
         public void localMatrixAndWorldMatrixAreIdentityWhenNew()
         {
-            Transform transform = new Transform();
             Assert.That(transform.localMatrix, Is.EqualTo(Matrix.Identity));
             Assert.That(transform.worldMatrix, Is.EqualTo(Matrix.Identity));
         }
@@ -21,8 +29,6 @@ namespace tests
         [Test]
         public void localAndWorldTranslationAreEqualWhenParentUnset()
         {
-            Transform transform = new Transform();
-
             transform.localTranslation = anyTranslation;
             Assert.That(transform.Translation, Is.EqualTo(anyTranslation));
             Assert.That(transform.localMatrix, Is.EqualTo(transform.worldMatrix));
@@ -117,8 +123,6 @@ namespace tests
         [Test]
         public void rotationDoubledWhenRotateCalledTwice()
         {
-            var transform = new Transform();
-            
             transform.rotateLocal(Vector3.Backward, 1);
             transform.rotateLocal(Vector3.Backward, 1);
             assertMatrixEquals(transform.localMatrix, Matrix.CreateRotationZ(2));
@@ -127,23 +131,68 @@ namespace tests
         [Test]
         public void getScaleEqualsSetScale()
         {
-            var transform = new Transform();
             var newScale = new Vector3(10f);
             transform.localScale = newScale;
             assertVectorEquals(transform.localScale, newScale);
         }
 
         [Test]
+        public void translationPreservedWhenSettingScale()
+        {
+            transform.localTranslation = anyTranslation;
+            var newScale = new Vector3(10f);
+            transform.localScale = newScale;
+
+            assertVectorEquals(transform.localTranslation, anyTranslation);
+        }
+
+        [Test]
         public void scaleIsTheSameWhenSettingScaleTwice()
         {
-            var transform = new Transform();
             var newScale = new Vector3(10f);
             transform.localScale = newScale;
             transform.localScale = newScale;
             assertVectorEquals(transform.localScale, newScale);
         }
 
-        const float epsilon = 0.000001f;
+        [Test]
+        public void localTranslationIsTheOppositeOfPivotOffset() {
+            var pivot = transform.createPivotAtOffset(nonZero, nonZero);
+
+            assertVectorEquals(transform.localTranslation, new Vector3(-nonZero, -nonZero, 0f));
+            assertVectorEquals(pivot.localTranslation, new Vector3(nonZero, nonZero, 0f));
+        }
+
+        [Test]
+        public void childHasNegativeOffsetWhenTransformIsTranslated() {
+            transform.localTranslation = anyTranslation;
+            var pivot = transform.createPivotAtOffset(nonZero, nonZero);
+            
+            assertVectorEquals(transform.localTranslation, new Vector3(-nonZero, -nonZero, 0f));
+            assertVectorEquals(pivot.localTranslation, anyTranslation + new Vector3(nonZero, nonZero, 0f));
+        }
+
+        [Test]
+        public void childRotatesAroundPivotOffsetWhenTurningUpsideDown() {
+            transform.localTranslation = anyTranslation;
+            var pivot = transform.createPivotAtOffset(nonZero, nonZero);
+            var nonZeroOffset = new Vector3(nonZero, nonZero, 0f);
+
+            var localPoint = new Vector3(20, -20, 0);
+
+            assertVectorEquals(Vector3.Transform(Vector3.Zero, transform.worldMatrix), anyTranslation);
+
+            assertVectorEquals(Vector3.Transform(localPoint, transform.worldMatrix), localPoint + anyTranslation);
+
+            pivot.rotateLocal(flipUpsideDown);
+
+            assertVectorEquals(Vector3.Transform(Vector3.Zero, transform.worldMatrix), anyTranslation + nonZeroOffset + nonZeroOffset);
+
+            assertVectorEquals(Vector3.Transform(localPoint, transform.worldMatrix), anyTranslation + nonZeroOffset - (localPoint - nonZeroOffset));
+
+        }
+
+        const float epsilon = 0.00001f;
 
         static void assertVectorEquals(Vector3 actual, Vector3 expected)
         {
