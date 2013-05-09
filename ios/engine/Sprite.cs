@@ -252,7 +252,7 @@ public class Sprite {
 //	}
 //
     public Transform createPivotOnCenter() {
-        return transform.createPivotAtOffset(worldWidth / 2f, -worldHeight / 2f);
+        return transform.createPivotAtOffset(worldWidth / 2f, worldHeight / 2f);
 	}
 //	
 //	public GameObject createPivotOnBottomRightCorner() {
@@ -276,11 +276,11 @@ public class Sprite {
 //	}
 //	
 	private float worldHeight {
-        get { return Camera.main.ScreenToWorldPoint(new Vector3(0f, height, 0f)).Y; }
+        get { return (float) height / Camera.main.pixelHeight * Camera.main.orthographicSize * 2.0f; }
 	}
 	
 	private float worldWidth {
-        get { return Camera.main.ScreenToWorldPoint(new Vector3(width, 0f, 0f)).X; }
+        get { return (float) width / Camera.main.pixelWidth * Camera.main.orthographicSize * 2.0f; }
 	}
 
 	private Vector3 snapToPixel(Vector3 pos) {
