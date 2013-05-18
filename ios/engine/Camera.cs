@@ -39,11 +39,6 @@ public class Camera
 		projection = Matrix.CreateOrthographic(2 * orthographicSize * viewport.AspectRatio, orthographicSize * 2, NEAR, FAR);
 	}
 
-	public Matrix ViewMatrix()
-	{
-		return Matrix.CreateScale(1, -1, 1) * Matrix.CreateTranslation(0, viewport.Height, 0);
-	}
-
 	public Vector3 WorldToScreenPoint(Vector3 source) {
 		return viewport.Project(source, projection, view, world); 
 	}

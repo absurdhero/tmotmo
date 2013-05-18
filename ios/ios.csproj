@@ -125,6 +125,8 @@
     <Compile Include="engine\DelayedCycler.cs" />
     <Compile Include="engine\SpriteTouchExtensions.cs" />
     <Compile Include="engine\Transform.cs" />
+    <Compile Include="scenes\HospitalRoom.cs" />
+    <Compile Include="scenes\SceneTwo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -167,6 +169,22 @@
     <BundleResource Include="Content\SceneOne\triangle1.png" />
     <BundleResource Include="Content\SceneOne\triangle2.png" />
     <BundleResource Include="Content\SceneOne\triangle3.png" />
+    <BundleResource Include="Content\HospitalRoom\hospital_bg.png" />
+    <BundleResource Include="Content\HospitalRoom\chart-fixed.png" />
+    <BundleResource Include="Content\HospitalRoom\cover-fixed.png" />
+    <BundleResource Include="Content\HospitalRoom\eyes1.png" />
+    <BundleResource Include="Content\HospitalRoom\eyes2.png" />
+    <BundleResource Include="Content\HospitalRoom\footrest-fixed.png" />
+    <BundleResource Include="Content\HospitalRoom\guy1-fixed.png" />
+    <BundleResource Include="Content\HospitalRoom\guy2-fixed.png" />
+    <BundleResource Include="Content\HospitalRoom\heart1.png" />
+    <BundleResource Include="Content\HospitalRoom\heart2.png" />
+    <BundleResource Include="Content\HospitalRoom\heart3.png" />
+    <BundleResource Include="Content\HospitalRoom\heart4.png" />
+    <BundleResource Include="Content\HospitalRoom\heart5.png" />
+    <BundleResource Include="Content\HospitalRoom\heart6.png" />
+    <BundleResource Include="Content\HospitalRoom\heart7.png" />
+    <BundleResource Include="Content\HospitalRoom\z.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

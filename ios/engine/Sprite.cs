@@ -5,11 +5,13 @@ using TexturedQuad;
 using System;
 
 public class Sprite {
-	protected GraphicsDeviceManager graphics;
-	public Texture2D[] textures;
+    public Texture2D[] textures;
+
+    protected GraphicsDeviceManager graphics;
 	protected Quad quad;
 
     public Transform transform;
+    public String firstTextureName;
 
 	public int height = 0;
 	public int width = 0;
@@ -17,7 +19,7 @@ public class Sprite {
 	private int texture_index = 0;
 	private bool texture_dirty = true;
 
-	private bool isVisible = true;
+    public bool isVisible { get; set; }
 
 	public Vector3 screenPosition {
 		get {
@@ -71,6 +73,9 @@ public class Sprite {
 		this.graphics = graphics;
 		this.textures = textures;
 
+        isVisible = true;
+        firstTextureName = textures[0].Name;
+
 		width = textures[0].Width;
 		height = textures[0].Height;
 
@@ -84,7 +89,8 @@ public class Sprite {
 
 	public void Draw()
 	{
-		if (isVisible) {
+        if (isVisible) {
+//            Debug.Log("Drawing " + firstTextureName);
             createMesh();
 
             var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
@@ -183,40 +189,37 @@ public class Sprite {
 	public bool Contains(Camera camera, Vector3 position) {
 		return ScreenRect(camera).Contains(new Point((int) position.X, (int) position.X));
 	}
-//
-//	public void setScreenPosition(float x, float y) {
-//		Vector3 pos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-//		pos.x = x;
-//		pos.y = y;
-//		gameObject.transform.position = Camera.main.ScreenToWorldPoint(pos);
-//	}
-//	
-//	public void setScreenPosition(int x, int y) {
-//		setScreenPosition((float) x, (float) y);
-//	}
-//	
-//	public void setScreenPosition(Vector3 position) {
-//		setScreenPosition(position.x, position.y);
-//	}
-//	
-//	public Vector3 getScreenPosition() {
-//		return Camera.main.WorldToScreenPoint(gameObject.transform.position);
-//	}
-//	
-//	/* In viewport space, 0 and 1 are the edges of the screen. */
+
+	public void setScreenPosition(float x, float y) {
+        screenPosition = new Vector3(x, y, screenPosition.Z);
+	}
+	
+	public void setScreenPosition(int x, int y) {
+		setScreenPosition((float) x, (float) y);
+	}
+	
+	public void setScreenPosition(Vector3 position) {
+		setScreenPosition(position.X, position.Y);
+	}
+	
+	public Vector3 getScreenPosition() {
+        return screenPosition;
+	}
+	
+	/* In viewport space, 0 and 1 are the edges of the screen. */
 	public void setCenterToViewportCoord(float x, float y) {
 		var centeredPosition = snapToPixel(Camera.main.ViewportToWorldPoint(new Vector3(x, y, 0.0f)));
 		worldPosition = new Vector3(centeredPosition.X, centeredPosition.Y, worldPosition.Z) - new Vector3(Center(), 0);
 	}
-//	
-//	public void setWorldPosition(float x, float y, float z) {
-//		setWorldPosition(new Vector3(x, y, z));
-//	}
-//
-//	public void setWorldPosition(Vector3 pos) {
-//		gameObject.transform.position = snapToPixel(pos);
-//	}
-//	
+	
+	public void setWorldPosition(float x, float y, float z) {
+		setWorldPosition(new Vector3(x, y, z));
+	}
+
+	public void setWorldPosition(Vector3 pos) {
+		worldPosition = snapToPixel(pos);
+	}
+	
 	public void setDepth(float z) {
         var position = worldPosition;
         position.Z = z;

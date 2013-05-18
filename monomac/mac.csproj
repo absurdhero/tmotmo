@@ -139,6 +139,12 @@
     <Compile Include="..\ios\engine\Transform.cs">
       <Link>engine\Transform.cs</Link>
     </Compile>
+    <Compile Include="..\ios\scenes\SceneTwo.cs">
+      <Link>scenes\SceneTwo.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\HospitalRoom.cs">
+      <Link>scenes\HospitalRoom.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
