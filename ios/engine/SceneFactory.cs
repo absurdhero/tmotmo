@@ -22,8 +22,13 @@ public class SceneFactory : MarshalByRefObject {
         this.graphics = graphics;
         this.content = content;
 		this.sceneManager = sceneManager;
-		scenes = new Scene[3];
+        Reset();
 	}
+
+    public void Reset() {
+        scenesInstantiated = false;
+        scenes = new Scene[3];
+    }
 
 	private void ensureScenesInstantiated() {
 		if (scenesInstantiated) return;
@@ -85,10 +90,5 @@ public class SceneFactory : MarshalByRefObject {
 		foreach(var scene in scenes) {
 			scene.LoadAssets();
 		}
-	}
-	
-	public void Reset() {
-		scenesInstantiated = false;
-		scenes = new Scene[16];
 	}
 }

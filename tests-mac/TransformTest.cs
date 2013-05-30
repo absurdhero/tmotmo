@@ -147,6 +147,24 @@ namespace tests
         }
 
         [Test]
+        public void worldTranslationNotScaledWhenSetAfterScale()
+        {
+            var newScale = new Vector3(10f);
+            transform.localScale = newScale;
+
+            transform.Translation = anyTranslation;
+
+            assertVectorEquals(transform.Translation, anyTranslation);
+        }
+
+        [Test]
+        public void scaleByX() {
+            var newScale = new Vector3(10f, 1f, 1f);
+            transform.localScale = newScale;
+            assertVectorEquals(transform.localScale, newScale);
+        }
+
+        [Test]
         public void scaleIsTheSameWhenSettingScaleTwice()
         {
             var newScale = new Vector3(10f);
@@ -190,6 +208,24 @@ namespace tests
 
             assertVectorEquals(Vector3.Transform(localPoint, transform.worldMatrix), anyTranslation + nonZeroOffset - (localPoint - nonZeroOffset));
 
+        }
+
+        [Test]
+        public void localTranslationIsTheSameWhenSettingTwice()
+        {
+            var newTranslation = new Vector3(10f);
+            transform.localTranslation = newTranslation;
+            transform.localTranslation = newTranslation;
+            assertVectorEquals(transform.localTranslation, newTranslation);
+        }
+
+        [Test]
+        public void worldTranslationIsTheSameWhenSettingTwice()
+        {
+            var newTranslation = new Vector3(10f);
+            transform.Translation = newTranslation;
+            transform.Translation = newTranslation;
+            assertVectorEquals(transform.Translation, newTranslation);
         }
 
         const float epsilon = 0.00001f;

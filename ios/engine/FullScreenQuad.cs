@@ -2,7 +2,6 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using TexturedQuad;
 
 public class FullScreenQuad : Sprite {
     const float DEPTH = 20;
@@ -22,7 +21,7 @@ public class FullScreenQuad : Sprite {
 		var height = graphics.GraphicsDevice.Viewport.Height;
 
 		var upperLeft = new Vector3(-(width / 2), -(height / 2), DEPTH);
-		quad = new Quad(upperLeft, Vector3.Forward, Vector3.Down, width, height);
+		quad = new Quad(upperLeft, Vector3.Forward, Vector3.Down, Vector3.Right, width, height);
 	}
 }
 

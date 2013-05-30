@@ -127,6 +127,8 @@
     <Compile Include="engine\Transform.cs" />
     <Compile Include="scenes\HospitalRoom.cs" />
     <Compile Include="scenes\SceneTwo.cs" />
+    <Compile Include="engine\MessageBox.cs" />
+    <Compile Include="engine\Prompt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -185,6 +187,8 @@
     <BundleResource Include="Content\HospitalRoom\heart6.png" />
     <BundleResource Include="Content\HospitalRoom\heart7.png" />
     <BundleResource Include="Content\HospitalRoom\z.png" />
+    <BundleResource Include="Content\messageBorder.png" />
+    <BundleResource Include="Content\1px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -40,7 +40,10 @@ class SceneTwo : Scene {
 				room.openEyes();
 			}
 			
-			room.hintWhenTouched((touched) => { if (touched == room.cover)  {
+			room.hintWhenTouched((touched) => {
+                Debug.Log("triggered");
+                if (touched == room.cover)  {
+                    Debug.Log("cover touched in trigger");
 					room.removeCover();
 					room.doubleHeartRate(Time.time);
 					room.addSplitLine();

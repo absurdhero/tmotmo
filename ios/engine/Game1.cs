@@ -23,6 +23,8 @@ public class Game1 : Game
 	Camera camera;
 
     SceneManager sceneManager;
+    Prompt prompt;
+    MessageBox messageBox;
 #endregion
 
 #region Initialization
@@ -56,7 +58,10 @@ public class Game1 : Game
 	/// </summary>
 	protected override void LoadContent ()
 	{
-        sceneManager = new SceneManager(new LoopTracker(), new MessagePromptCoordinator());
+        prompt = new Prompt();
+        messageBox = new MessageBox(graphics, Content);
+        sceneManager = new SceneManager(new LoopTracker(),
+                                        new MessagePromptCoordinator(prompt, messageBox));
         var sceneFactory = new SceneFactory(sceneManager, Content, graphics);
 
         // create the scene objects and preload their content

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TouchInput;
+using System.Linq;
 
 public class TouchSensor : MarshalByRefObject {
 	UnityInput input;
@@ -16,7 +17,7 @@ public class TouchSensor : MarshalByRefObject {
 	}
 
 	IList<Touch> touchesFor(ICollection<TouchPhase> phases) {
-		var touches = new List<Touch>();
+        var touches = new List<Touch>();
 		for (int i = 0; i < input.touchCount; i++) {
 			var touch = input.GetTouch(i);
 			if (phases.Contains(touch.phase)) {

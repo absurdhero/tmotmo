@@ -1,10 +1,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using TexturedQuad;
 using System;
 
-public class Sprite {
+public class Sprite : MarshalByRefObject {
     public Texture2D[] textures;
 
     protected GraphicsDeviceManager graphics;
@@ -26,7 +25,7 @@ public class Sprite {
             return Camera.main.WorldToScreenPoint(transform.Translation);
 		}
 		set {
-            transform.Translation = Camera.main.ScreenToWorldPoint(value) - transform.Translation;
+            transform.Translation = Camera.main.ScreenToWorldPoint(value);
 		}
 	}
 
@@ -35,7 +34,7 @@ public class Sprite {
             return transform.Translation;
 		}
 		set {
-            transform.Translation = value  - transform.Translation;
+            transform.Translation = value;
         }
 	}
 
@@ -84,13 +83,13 @@ public class Sprite {
 
 	virtual protected void createMesh()
 	{
-        quad = new Quad(transform.Translation, transform.Forward, transform.Down, width, height);
+        quad = new Quad(transform.Translation, transform.Forward, transform.Down, transform.Right, width, height);
 	}
 
 	public void Draw()
 	{
         if (isVisible) {
-//            Debug.Log("Drawing " + firstTextureName);
+//            Debug.Log("Drawing " + screenPosition + " " + firstTextureName);
             createMesh();
 
             var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);

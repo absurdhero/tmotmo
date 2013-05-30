@@ -14,7 +14,7 @@ public class SceneManager {
 	public bool rightClickToComplete = false;
 	
 	// start the program at the given scene
-	private int skipToSceneNumber = 3;
+	private int skipToSceneNumber = 0;
 	
 	public SceneManager (LoopTracker loopTracker, MessagePromptCoordinator messagePromptCoordinator) {
 		this.loopTracker = loopTracker;
@@ -97,6 +97,7 @@ public class SceneManager {
 
     public void Draw() {
         currentScene.Draw();
+        messagePromptCoordinator.Draw();
     }
 
 	public float timeLeftInCurrentLoop() {

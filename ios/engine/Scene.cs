@@ -63,4 +63,5 @@ public abstract class Scene : MarshalByRefObject {
 	protected void rewindLoop(float seconds) {
 		rewindTime = seconds;
 	}
+
 }

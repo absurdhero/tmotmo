@@ -47,14 +47,18 @@
     <Reference Include="MonoGame.Framework, Version=3.0.1.0, Culture=neutral">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\..\dev\tmotmo\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CameraTests.cs">
       <DependentUpon>CameraTests.cs</DependentUpon>
     </Compile>
-    <Compile Include="SpriteTests.cs" />
     <Compile Include="TransformTest.cs" />
     <Compile Include="WigglerTest.cs" />
+    <Compile Include="TestMessagePrompt.cs" />
+    <Compile Include="QuadTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -46,7 +46,9 @@ public class Transform
             return worldMatrix.Translation;
         }
         set {
-            worldMatrix = Matrix.CreateTranslation(value) * worldMatrix;
+            var newWorldMatrix = worldMatrix;
+            newWorldMatrix.Translation = value;
+            worldMatrix = newWorldMatrix;
         }
     }
 

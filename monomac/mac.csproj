@@ -145,6 +145,15 @@
     <Compile Include="..\ios\scenes\HospitalRoom.cs">
       <Link>scenes\HospitalRoom.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\Prompt.cs">
+      <Link>engine\Prompt.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\MessageBox.cs">
+      <Link>engine\MessageBox.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SpriteTouchExtensions.cs">
+      <Link>engine\SpriteTouchExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
