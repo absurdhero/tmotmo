@@ -1,4 +1,3 @@
-
 using System;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
@@ -9,9 +8,9 @@ class SceneTwo : Scene {
 	private Wiggler wiggler;
 	private TouchSensor sensor;
 	
-    public SceneTwo(SceneManager manager, ContentManager content, GraphicsDeviceManager graphics) : base(manager, content, graphics) {
+    public SceneTwo(SceneManager manager, SpriteRenderer spriteRenderer) : base(manager, spriteRenderer) {
         timeLength = 8.0f;
-		room = new HospitalRoom(graphics, content, camera);
+        room = new HospitalRoom(spriteRenderer, camera);
 	}
 
 	public override void Setup(float startTime) {
@@ -54,9 +53,4 @@ class SceneTwo : Scene {
 		
 		room.Update();
 	}
-
-    public override void Draw() {
-        room.Draw();
-    }
-
 }

@@ -18,13 +18,10 @@ public class MessageBox : MarshalByRefObject {
     const float halfThickness = borderThickness / 2f;
     const float paddingX = 4f, paddingY = 4f;
 
-    
-    GraphicsDeviceManager deviceManager;
-    ContentManager contentManager;
+    SpriteRenderer spriteRenderer;
 
-    public MessageBox(GraphicsDeviceManager deviceManager, ContentManager contentManager) { //, Font font) {
-        this.contentManager = contentManager;
-        this.deviceManager = deviceManager;
+    public MessageBox(SpriteRenderer spriteRenderer) {
+        this.spriteRenderer = spriteRenderer; //, Font font) {
         buildMessageBackground();
 
 //        textLabel = new GameObject("message text");
@@ -36,10 +33,10 @@ public class MessageBox : MarshalByRefObject {
 //        text.font = font;
 //        text.material.SetColor("_Color", Color.black);
 
-        leftBorder = new Sprite(deviceManager, contentManager, "messageBorder");
-        rightBorder = new Sprite(deviceManager, contentManager, "messageBorder");
-        topBorder = new Sprite(deviceManager, contentManager, "messageBorder");
-        bottomBorder = new Sprite(deviceManager, contentManager, "messageBorder");
+        leftBorder = spriteRenderer.add(new Sprite(), "messageBorder");
+        rightBorder = spriteRenderer.add(new Sprite(), "messageBorder");
+        topBorder = spriteRenderer.add(new Sprite(), "messageBorder");
+        bottomBorder = spriteRenderer.add(new Sprite(), "messageBorder");
 
         // these are positive because they are relative to the camera's placement
         // the world z coordinate will be negative
@@ -51,16 +48,8 @@ public class MessageBox : MarshalByRefObject {
         hide();
     }
 
-    public void Draw() {
-        messageBackground.Draw();
-        leftBorder.Draw();
-        rightBorder.Draw();
-        topBorder.Draw();
-        bottomBorder.Draw();
-    }
-
     void buildMessageBackground() {
-        messageBackground = new Sprite(deviceManager, contentManager, "1px");
+        messageBackground = spriteRenderer.add(new Sprite(), "1px");
 
         messageBackground.visible(false);
         messageBackground.setDepth(-9f);

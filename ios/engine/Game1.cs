@@ -58,11 +58,12 @@ public class Game1 : Game
 	/// </summary>
 	protected override void LoadContent ()
 	{
+        var spriteRenderer = new SpriteRenderer(graphics, Content);
         prompt = new Prompt();
-        messageBox = new MessageBox(graphics, Content);
+        messageBox = new MessageBox(spriteRenderer);
         sceneManager = new SceneManager(new LoopTracker(),
                                         new MessagePromptCoordinator(prompt, messageBox));
-        var sceneFactory = new SceneFactory(sceneManager, Content, graphics);
+        var sceneFactory = new SceneFactory(sceneManager, spriteRenderer);
 
         // create the scene objects and preload their content
         sceneManager.LoadAndStart(sceneFactory);

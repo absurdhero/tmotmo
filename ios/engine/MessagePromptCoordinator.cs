@@ -42,7 +42,6 @@ public class MessagePromptCoordinator : MarshalByRefObject {
 
     public void Draw()
     {
-        messageBox.Draw();
         prompt.Draw();
     }
 

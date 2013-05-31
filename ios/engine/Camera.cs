@@ -6,7 +6,7 @@ public class Camera
 {
 	public static Camera main;
 
-	private readonly Viewport viewport;
+	public readonly Viewport viewport;
 	public Matrix world {get; private set;}
 	public Matrix view  {get; private set;}
 	public Matrix projection  {get; private set;}

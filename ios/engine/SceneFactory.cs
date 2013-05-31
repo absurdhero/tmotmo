@@ -10,17 +10,15 @@ using Microsoft.Xna.Framework.Content;
 
 public class SceneFactory : MarshalByRefObject {
 	SceneManager sceneManager;
-    ContentManager content;
-    GraphicsDeviceManager graphics;
-	
+    SpriteRenderer spriteRenderer;
+
 	Type LAST_SCENE = typeof(SceneTwo);
 
 	bool scenesInstantiated = false;
 	Scene[] scenes;
 
-    public SceneFactory (SceneManager sceneManager, ContentManager content, GraphicsDeviceManager graphics) {
-        this.graphics = graphics;
-        this.content = content;
+    public SceneFactory (SceneManager sceneManager, SpriteRenderer spriteRenderer) {
+        this.spriteRenderer = spriteRenderer;
 		this.sceneManager = sceneManager;
         Reset();
 	}
@@ -28,14 +26,15 @@ public class SceneFactory : MarshalByRefObject {
     public void Reset() {
         scenesInstantiated = false;
         scenes = new Scene[3];
+        spriteRenderer.clear();
     }
 
 	private void ensureScenesInstantiated() {
 		if (scenesInstantiated) return;
 
-		scenes[0] = new TitleScene(sceneManager, content, graphics);
-		scenes[1] = new SceneOne(sceneManager, content, graphics);
-		scenes[2] = new SceneTwo(sceneManager, content, graphics);
+        scenes[0] = new TitleScene(sceneManager, spriteRenderer);
+        scenes[1] = new SceneOne(sceneManager, spriteRenderer);
+        scenes[2] = new SceneTwo(sceneManager, spriteRenderer);
 //		var sceneTwo = new SceneTwo(sceneManager);
 //		scenes[2] = sceneTwo;
 //		var sceneThree = new SceneThree(sceneManager, sceneTwo.room);
@@ -62,7 +61,7 @@ public class SceneFactory : MarshalByRefObject {
 	
 	public Scene GetFirstScene() {
 		ensureScenesInstantiated();
-		return new TitleScene(sceneManager, content, graphics);
+        return new TitleScene(sceneManager, spriteRenderer);
 	}
 
 	public bool isFirstScene(Scene scene) {

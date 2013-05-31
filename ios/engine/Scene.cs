@@ -8,8 +8,7 @@ public abstract class Scene : MarshalByRefObject {
 	protected float timeLength = 0.0f;
 	protected Camera camera;
 	protected SceneManager sceneManager;
-    protected ContentManager content;
-    protected GraphicsDeviceManager graphics;
+    protected SpriteRenderer spriteRenderer;
 
 	public float rewindTime { get; protected set; }
 
@@ -40,10 +39,9 @@ public abstract class Scene : MarshalByRefObject {
 	/// Set this to false if transition between scenes must be perfectly smooth
 	public bool permitUnloadResources { get; protected set; }
 
-    public Scene(SceneManager manager, ContentManager content, GraphicsDeviceManager graphics) {
-		sceneManager = manager;
-        this.content = content;
-        this.graphics = graphics;
+    public Scene(SceneManager manager, SpriteRenderer spriteRenderer) {
+        sceneManager = manager;
+        this.spriteRenderer = spriteRenderer;
         completed = false;
 		permitUnloadResources = true;
 		camera = Camera.main;
@@ -53,9 +51,15 @@ public abstract class Scene : MarshalByRefObject {
 	public virtual void LoadAssets() {}
 	public abstract void Setup(float startTime);
 	public abstract void Update();
-    public abstract void Draw();
-	public abstract void Destroy();
-	
+
+    public virtual void Destroy() {
+        spriteRenderer.clear();
+    }
+
+    public virtual void Draw() {
+        spriteRenderer.Draw();
+    }
+
 	public virtual void Transition() {
 		sceneManager.NextScene();
 	}

@@ -14,16 +14,16 @@ public class TitleScene : Scene {
 
 	private Cycler cycle_title, cycle_start;
 	
-	public TitleScene(SceneManager manager, ContentManager content, GraphicsDeviceManager graphics) : base(manager, content, graphics) {
+	public TitleScene(SceneManager manager, SpriteRenderer spriteRenderer) : base(manager, spriteRenderer) {
 	}
 
 	public override void Setup(float startTime) {
-		background = new FullScreenQuad(graphics, content, this, new[] {"bg"});
-		title = new Sprite(graphics, content, this, new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
-		subtitle = new Sprite(graphics, content, this, new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
-		news = new Sprite(graphics, content, this, new[] {"news1", "news2"});
-		buyMusic = new Sprite(graphics, content, this, new[] {"itunes1", "itunes2"});
-		startButton = new Sprite(graphics, content, this, new[] {"tap1", "tap2", "tap3"});
+		background = spriteRenderer.add(new FullScreenQuad(), this, new[] {"bg"});
+        title = spriteRenderer.add(new Sprite(), this, new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
+        subtitle = spriteRenderer.add(new Sprite(), this, new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
+        news = spriteRenderer.add(new Sprite(), this, new[] {"news1", "news2"});
+        buyMusic = spriteRenderer.add(new Sprite(), this, new[] {"itunes1", "itunes2"});
+        startButton = spriteRenderer.add(new Sprite(), this, new[] {"tap1", "tap2", "tap3"});
 		
 		Camera camera = Camera.main;
 
@@ -50,15 +50,6 @@ public class TitleScene : Scene {
 		cycle_title.AddSprite(subtitle);
 	}
 
-	public override void Draw() {
-		background.Draw();
-		title.Draw();
-		subtitle.Draw();
-		news.Draw();
-		buyMusic.Draw();
-		startButton.Draw();
-	}
-
 	public override void Update () {
 		var touch = new TouchSensor(input);
 		
@@ -80,12 +71,12 @@ public class TitleScene : Scene {
 	}
 
 	public override void Destroy() {
-		Sprite.Destroy(title);
-		Sprite.Destroy(subtitle);
-		Sprite.Destroy(news);
-		Sprite.Destroy(buyMusic);
-		Sprite.Destroy(startButton);
-		Sprite.Destroy(background);
+        spriteRenderer.remove(title);
+        spriteRenderer.remove(subtitle);
+        spriteRenderer.remove(news);
+        spriteRenderer.remove(buyMusic);
+        spriteRenderer.remove(startButton);
+        spriteRenderer.remove(background);
 	}
 
 	private void animateStartButton() {

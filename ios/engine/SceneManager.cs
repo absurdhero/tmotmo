@@ -16,7 +16,7 @@ public class SceneManager {
 	// start the program at the given scene
 	private int skipToSceneNumber = 0;
 	
-	public SceneManager (LoopTracker loopTracker, MessagePromptCoordinator messagePromptCoordinator) {
+    public SceneManager (LoopTracker loopTracker, MessagePromptCoordinator messagePromptCoordinator) {
 		this.loopTracker = loopTracker;
 		this.messagePromptCoordinator = messagePromptCoordinator;
 	}

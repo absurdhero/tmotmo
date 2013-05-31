@@ -23,18 +23,18 @@ class SceneOne : Scene {
  	// animate both shapes at the same frequency
 	const float shapeSpeed = 0.5f;
 
-	public SceneOne(SceneManager manager, ContentManager content, GraphicsDeviceManager graphics) : base(manager, content, graphics) {
+    public SceneOne(SceneManager manager, SpriteRenderer spriteRenderer) : base(manager, spriteRenderer) {
 		timeLength = 8.0f;
 	}
 
 	public override void LoadAssets() {
-        background = new FullScreenQuad(graphics, content, "TitleScene/bg");
+        background = spriteRenderer.add(new FullScreenQuad(), "TitleScene/bg");
 		background.visible(false);
 
-        same = new Sprite(graphics, content, this, "same");
-        notSame = new Sprite(graphics, content, this, "notsame", "notsame_caps", "notsame_g1", "notsame_g2");
-        circle = new Sprite(graphics, content, this, "circle1", "circle2", "circle3", "circle4", "circle5");
-        triangle = new Sprite(graphics, content, this, "triangle1", "triangle2", "triangle3");
+        same = spriteRenderer.add(new Sprite(), this, "same");
+        notSame = spriteRenderer.add(new Sprite(), this, "notsame", "notsame_caps", "notsame_g1", "notsame_g2");
+        circle = spriteRenderer.add(new Sprite(), this, "circle1", "circle2", "circle3", "circle4", "circle5");
+        triangle = spriteRenderer.add(new Sprite(), this, "triangle1", "triangle2", "triangle3");
 
 		same.visible(false);
 		notSame.visible(false);
@@ -69,11 +69,11 @@ class SceneOne : Scene {
 	}
 
 	public override void Destroy() {
-		Sprite.Destroy(circle);
-		Sprite.Destroy(triangle);
-		Sprite.Destroy(same);
-		Sprite.Destroy(notSame);
-		FullScreenQuad.Destroy(background);
+		spriteRenderer.remove(circle);
+        spriteRenderer.remove(triangle);
+        spriteRenderer.remove(same);
+        spriteRenderer.remove(notSame);
+        spriteRenderer.remove(background);
 		wiggler.Destroy();
 	}
 
@@ -119,15 +119,6 @@ class SceneOne : Scene {
 			triangle.Animate();
 		}
 	}
-
-    public override void Draw()
-    {
-        background.Draw();
-        circle.Draw();
-        triangle.Draw();
-        same.Draw();
-        notSame.Draw();
-    }
 
 	bool triangleShowing() {
 		return triangleCycler != null;

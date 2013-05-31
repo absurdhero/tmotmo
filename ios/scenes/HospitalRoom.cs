@@ -4,10 +4,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 
 public class HospitalRoom {
-    ContentManager content;
-    GraphicsDeviceManager graphics;
+    SpriteRenderer spriteRenderer;
 
-	FullScreenQuad room;
+	Sprite room;
 	
 	int guyCenterOffset = 6;
 	public Sprite guyLeft, guyRight;
@@ -33,27 +32,18 @@ public class HospitalRoom {
 
     Dictionary<Sprite, ActionResponsePair[]> interactions;
 
-    public HospitalRoom(GraphicsDeviceManager graphics, ContentManager content, Camera camera) {
-        this.graphics = graphics;
-        this.content = content;
+    public HospitalRoom(SpriteRenderer spriteRenderer, Camera camera) {
+        this.spriteRenderer = spriteRenderer;
 		this.camera = camera;
 	}
 
-    public void Draw()
-    {
-        foreach(Sprite sprite in new[] {room, guyLeft, guyRight, cover, zzz, footBoard, clipBoard, eyes, heartRate}) {
-            if (sprite != null) {
-                sprite.Draw();
-            }
-        }
-    }
-
 	public void createBackground() {
-		room = new FullScreenQuad(graphics, content, this, "hospital_bg");
+		room = spriteRenderer.add(new FullScreenQuad(), this, "hospital_bg");
 	}
 
 	private void DestroyIfNotNull(Sprite sprite) {
-		if (sprite != null) Sprite.Destroy(sprite);
+        if (sprite != null)
+            spriteRenderer.remove(sprite);
 	}
 
 	public void Destroy() {
@@ -71,8 +61,8 @@ public class HospitalRoom {
 	}
 	
 	public void addPerson() {
-        guyLeft = new Sprite(graphics, content, this, "guy1-fixed");
-        guyRight = new Sprite(graphics, content, this, "guy2-fixed");
+        guyLeft = spriteRenderer.add(new Sprite(), this, "guy1-fixed");
+        guyRight = spriteRenderer.add(new Sprite(), this, "guy2-fixed");
 
 		guyLeft.setScreenPosition((int) camera.pixelWidth / 2 - guyLeft.PixelWidth() + guyCenterOffset,
 									 (int) camera.pixelHeight / 2 - guyLeft.PixelHeight() / 2);
@@ -81,13 +71,13 @@ public class HospitalRoom {
 		guyLeftInitialPosition = guyLeft.getScreenPosition();
 		guyRightInitialPosition = guyRight.getScreenPosition();
 		
-        eyes = new Sprite(graphics, content, this, "eyes1", "eyes2");
+        eyes = spriteRenderer.add(new Sprite(), this, "eyes1", "eyes2");
 		eyes.setScreenPosition(232.2f, 89f);
         eyes.setDepth(-1);
 	}
 	
 	public void addZzz() {
-        zzz = new Sprite(graphics, content, this, "z");
+        zzz = spriteRenderer.add(new Sprite(), this, "z");
 		zzz.setScreenPosition(320, 70);
         zzz.setDepth(-1);
 		zzzAnimator = new ZzzAnimator(zzz);
@@ -115,7 +105,7 @@ public class HospitalRoom {
             cover.isVisible = true;
 			return;
 		}
-        cover =  new Sprite(graphics, content, this, "cover-fixed");
+        cover = spriteRenderer.add(new Sprite(), this, "cover-fixed");
 		cover.setCenterToViewportCoord(0.515f, 0.34f);
 	}
 	
@@ -126,19 +116,19 @@ public class HospitalRoom {
 	public void addFootboard() {
 		addClipBoard();
 
-        footBoard = new Sprite(graphics, content, this, "footrest-fixed");
+        footBoard = spriteRenderer.add(new Sprite(), this, "footrest-fixed");
         footBoard.setScreenPosition(169, 226);
         footBoard.setDepth(-1f);
 	}
 	
 	private void addClipBoard() {
-        clipBoard = new Sprite(graphics, content, this, "chart-fixed");
+        clipBoard = spriteRenderer.add(new Sprite(), this, "chart-fixed");
         clipBoard.setScreenPosition(220, 220);
         clipBoard.setDepth(-1f);
 	}
 	
 	public void addHeartRate(float startTime) {
-        heartRate = new Sprite(graphics, content, this, "heart1", "heart2", "heart3", "heart4", "heart5", "heart6", "heart7");
+        heartRate = spriteRenderer.add(new Sprite(), this, "heart1", "heart2", "heart3", "heart4", "heart5", "heart6", "heart7");
         heartRate.setScreenPosition(54, 110);
         heartRate.setDepth(-1);
 		

@@ -129,6 +129,7 @@
     <Compile Include="scenes\SceneTwo.cs" />
     <Compile Include="engine\MessageBox.cs" />
     <Compile Include="engine\Prompt.cs" />
+    <Compile Include="engine\SpriteRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

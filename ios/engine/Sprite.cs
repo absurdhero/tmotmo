@@ -1,21 +1,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
 using System;
 
 public class Sprite : MarshalByRefObject {
     public Texture2D[] textures;
-
-    protected GraphicsDeviceManager graphics;
-	protected Quad quad;
-
-    public Transform transform;
-    public String firstTextureName;
+    public Transform transform = new Transform();
 
 	public int height = 0;
 	public int width = 0;
 	
-	private int texture_index = 0;
+	public int texture_index = 0;
 	private bool texture_dirty = true;
 
     public bool isVisible { get; set; }
@@ -38,80 +32,14 @@ public class Sprite : MarshalByRefObject {
         }
 	}
 
-	/// Destroys the underlying GameObject
-	public static void Destroy(Sprite sprite) {
-	}
-
-	static string[] pathsForClassName (object obj, string[] textureNames)
-	{
-		var resourcePrefix = obj.GetType ().ToString ();
-		string[] texturePaths = new string[textureNames.Length];
-		for (int i = 0; i < textureNames.Length; i++) {
-			texturePaths [i] = resourcePrefix + "/" + textureNames [i];
-		}
-		return texturePaths;
-	}
-
-	static Texture2D[] loadFromPaths (ContentManager content, string[] texturePaths)
-	{
-		Texture2D[] textures = new Texture2D[texturePaths.Length];
-		for (int i = 0; i < texturePaths.Length; i++) {
-			textures [i] = content.Load<Texture2D> (texturePaths [i]);
-			System.Console.WriteLine("loaded texture " + texturePaths[i]);
-		}
-		return textures;
-	}
-
-	public Sprite(GraphicsDeviceManager graphics, ContentManager content, object obj, params string[] textureNames) 
-	: this(graphics, content, pathsForClassName (obj, textureNames)) { }
-	
-	public Sprite(GraphicsDeviceManager graphics, ContentManager content, params string[] texturePaths)
-	: this(graphics, loadFromPaths (content, texturePaths)) { }
-
-	public Sprite(GraphicsDeviceManager graphics, Texture2D[] textures) {
-		this.graphics = graphics;
-		this.textures = textures;
-
+	public Sprite() {
         isVisible = true;
-        firstTextureName = textures[0].Name;
-
-		width = textures[0].Width;
-		height = textures[0].Height;
-
-        transform = new Transform();
 	}
 
-	virtual protected void createMesh()
+	virtual public Quad createMesh()
 	{
-        quad = new Quad(transform.Translation, transform.Forward, transform.Down, transform.Right, width, height);
+        return new Quad(transform.Translation, transform.Forward, transform.Down, transform.Right, width, height);
 	}
-
-	public void Draw()
-	{
-        if (isVisible) {
-//            Debug.Log("Drawing " + screenPosition + " " + firstTextureName);
-            createMesh();
-
-            var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
-
-			quadEffect.World = Camera.main.world;
-			quadEffect.View = Camera.main.view;
-			quadEffect.Projection = Camera.main.projection;
-			quadEffect.Texture = textures[texture_index];
-
-			foreach (EffectPass pass in quadEffect.CurrentTechnique.Passes)
-			{
-				pass.Apply();
-				
-				graphics.GraphicsDevice.DrawUserIndexedPrimitives
-					<VertexPositionNormalTexture>(
-						PrimitiveType.TriangleList,
-						quad.Vertices, 0, 4,
-						quad.Indexes, 0, 2);
-			}
-
-		}
-	}	
 
 	void Update() {
 		if (texture_dirty) {
