@@ -73,10 +73,11 @@ public class MessageBox : MarshalByRefObject {
     public void setMessage(String message) {
         text.setText(wrap(message));
         Debug.Log(message); // print it since we can't draw it yet
-//
-//        var textRect = text.GetScreenRect(Camera.main);
-        // placeholder so it shows something until we have fonts
-        var textRect = new Rectangle(Camera.main.pixelWidth / 2 - 100, Camera.main.pixelHeight / 2 - 40, 200, 80);
+
+        var textRect = new Rectangle((int) text.screenPosition.X - text.width / 2,
+                                     (int) text.screenPosition.Y - text.height / 2,
+                                     text.width,
+                                     text.height);
 
         expandBackgroundToSizeOf(textRect);
 

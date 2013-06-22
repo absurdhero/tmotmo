@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 public class TextLabel : Sprite {
     Texture2D fontAtlas;
+    int lineHeight;
     public String text;
 
     SpriteRenderer spriteRenderer;
@@ -34,6 +35,7 @@ public class TextLabel : Sprite {
     protected TextLabel(SpriteRenderer spriteRenderer, FontFile fontFile, Texture2D texture) : base() {
         this.spriteRenderer = spriteRenderer;
         this.fontAtlas = texture;
+        lineHeight = fontFile.Common.LineHeight;
         sprites = new List<Sprite>();
         characterMap = new Dictionary<char, FontChar>();
 
@@ -41,6 +43,15 @@ public class TextLabel : Sprite {
         {
             char c = (char) fontCharacter.ID;
             characterMap.Add(c, fontCharacter);
+        }
+    }
+
+    void centerText(int width, int height)
+    {
+        foreach (var sprite in sprites)
+        {
+            var position = sprite.screenPosition;
+            sprite.screenPosition = new Vector3(position.X - width / 2, position.Y - height / 2, position.Z);
         }
     }
 
@@ -56,8 +67,10 @@ public class TextLabel : Sprite {
         int x = (int) this.screenPosition.X;
         int y = (int) this.screenPosition.Y;
 
-        int dx = x;
-        int dy = y;
+        int dx = 0;
+        int dy = 0;
+
+        int maxWidth = 0;
 
         foreach(char c in text)
         {
@@ -65,7 +78,7 @@ public class TextLabel : Sprite {
             if(characterMap.TryGetValue(c, out fc))
             {
                 var sourceRectangle = new Rectangle(fc.X, fc.Y, fc.Width, fc.Height);
-                var position = new Vector2(dx + fc.XOffset, dy + fc.YOffset);
+                var position = new Vector2(x + dx + fc.XOffset, y + dy + fc.YOffset);
 
                 var sprite = new Sprite();
                 sprite.screenPosition = new Vector3(position, this.screenPosition.Z);
@@ -74,8 +87,24 @@ public class TextLabel : Sprite {
                 spriteRenderer.add(sprite, fontAtlas, new Point(sourceRectangle.Width, sourceRectangle.Height));
 
                 dx += fc.XAdvance;
+
+                if (dx > maxWidth) {
+                    maxWidth = dx;
+                }
+
+                if (c == '\n') {
+                    dy += lineHeight;
+                    dx = 0;
+                }
             }
         }
+
+        int maxHeight = dy + lineHeight;
+
+        centerText(maxWidth, maxHeight);
+
+        this.width = maxWidth;
+        this.height = maxHeight;
     }
 
     public void show() {
@@ -84,8 +113,8 @@ public class TextLabel : Sprite {
     }
 
     public void hide() {
-//        foreach (var sprite in sprites)
-//            sprite.isVisible = false;
+        foreach (var sprite in sprites)
+            sprite.isVisible = false;
     }
 
 }
