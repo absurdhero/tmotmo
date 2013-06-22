@@ -71,7 +71,7 @@ public class TextLabel : Sprite {
                 sprite.screenPosition = new Vector3(position, this.screenPosition.Z);
                 sprite.cropArea = sourceRectangle;
                 sprites.Add(sprite);
-                spriteRenderer.add(sprite, fontAtlas, sourceRectangle.Location);
+                spriteRenderer.add(sprite, fontAtlas, new Point(sourceRectangle.Width, sourceRectangle.Height));
 
                 dx += fc.XAdvance;
             }
@@ -84,8 +84,8 @@ public class TextLabel : Sprite {
     }
 
     public void hide() {
-        foreach (var sprite in sprites)
-            sprite.isVisible = false;
+//        foreach (var sprite in sprites)
+//            sprite.isVisible = false;
     }
 
 }

@@ -31,7 +31,7 @@ public class PingPongTest
     [Test]
     public void returnsNegativeWhenNegative()
     {
-        Assert.That(Wiggler.pingPong(-0.5f, 1f), Is.EqualTo(0f));
+        Assert.That(Wiggler.pingPong(-0.5f, 1f), Is.EqualTo(-0.5f));
     }
 }
 
