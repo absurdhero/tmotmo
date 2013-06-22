@@ -60,7 +60,7 @@ public class Game1 : Game
 	{
         var spriteRenderer = new SpriteRenderer(graphics, Content);
         prompt = new Prompt();
-        messageBox = new MessageBox(spriteRenderer);
+        messageBox = new MessageBox(Content, spriteRenderer);
         sceneManager = new SceneManager(new LoopTracker(),
                                         new MessagePromptCoordinator(prompt, messageBox));
         var sceneFactory = new SceneFactory(sceneManager, spriteRenderer);

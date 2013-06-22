@@ -45,6 +45,8 @@ public class SceneManager {
 
 		currentScene.Destroy();
 
+        messagePromptCoordinator.Reset();
+
 		if(sceneFactory.isFirstScene(currentScene)) {
 			loopTracker.startPlaying();
 		}

@@ -3,11 +3,12 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SpriteRenderer
 {
     ContentManager content;
-    GraphicsDeviceManager graphics;
+    public GraphicsDeviceManager graphics;
 
     ISet<Sprite> sprites = new HashSet<Sprite>();
 
@@ -32,7 +33,7 @@ public class SpriteRenderer
         Texture2D[] textures = new Texture2D[texturePaths.Length];
         for (int i = 0; i < texturePaths.Length; i++) {
             textures [i] = content.Load<Texture2D> (texturePaths [i]);
-            System.Console.WriteLine("loaded texture " + texturePaths[i]);
+            Debug.Log("loaded texture " + texturePaths[i]);
         }
         return textures;
     }
@@ -55,6 +56,16 @@ public class SpriteRenderer
         return sprite;
     }
 
+    public Sprite add(Sprite sprite, Texture2D texture, Point dimensions) {
+        sprite.width = dimensions.X;
+        sprite.height = dimensions.Y;
+
+        sprite.textures = new [] {texture};
+        sprites.Add(sprite);
+
+        return sprite;
+    }
+
     public void remove(Sprite sprite) {
         sprites.Remove(sprite);
     }
@@ -64,7 +75,7 @@ public class SpriteRenderer
     }
 
     public void Draw() {
-        foreach(var sprite in sprites) {
+        foreach(var sprite in sprites.OrderBy<Sprite, float>((sprite) => sprite.screenPosition.Z)) {
             Draw(sprite);
         }
     }

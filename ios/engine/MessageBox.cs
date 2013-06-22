@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 public class MessageBox : MarshalByRefObject {
     const int lineWidth = 20;
@@ -20,18 +21,32 @@ public class MessageBox : MarshalByRefObject {
 
     SpriteRenderer spriteRenderer;
 
-    public MessageBox(SpriteRenderer spriteRenderer) {
-        this.spriteRenderer = spriteRenderer; //, Font font) {
+    TextLabel text;
+
+    ContentManager contentManager;
+
+    public MessageBox(ContentManager contentManager, SpriteRenderer spriteRenderer) {
+        this.contentManager = contentManager;
+        this.spriteRenderer = spriteRenderer;
+
+        registerSprites();
+    }
+
+    public void registerSprites() {
         buildMessageBackground();
 
-//        textLabel = new GameObject("message text");
-//        textLabel.active = false;
-//        text = textLabel.AddComponent<GUIText>();
-//        textLabel.transform.position = new Vector3(0.5f, 0.5f, -9.5f);
-//        text.alignment = TextAlignment.Center;
-//        text.anchor = TextAnchor.MiddleCenter;
-//        text.font = font;
-//        text.material.SetColor("_Color", Color.black);
+        text = TextLabel.create(spriteRenderer, contentManager, "sierra_agi_font");
+        text.worldPosition = new Vector3(0.5f, 0.5f, -9.5f);
+        text.hide();
+
+        //        textLabel = new GameObject("message text");
+        //        textLabel.active = false;
+        //        text = textLabel.AddComponent<GUIText>();
+        //        textLabel.transform.position = new Vector3(0.5f, 0.5f, -9.5f);
+        //        text.alignment = TextAlignment.Center;
+        //        text.anchor = TextAnchor.MiddleCenter;
+        //        text.font = font;
+        //        text.material.SetColor("_Color", Color.black);
 
         leftBorder = spriteRenderer.add(new Sprite(), "messageBorder");
         rightBorder = spriteRenderer.add(new Sprite(), "messageBorder");
@@ -40,10 +55,10 @@ public class MessageBox : MarshalByRefObject {
 
         // these are positive because they are relative to the camera's placement
         // the world z coordinate will be negative
-        leftBorder.setDepth(-9.5f);
-        rightBorder.setDepth(-9.5f);
-        topBorder.setDepth(-9.5f);
-        bottomBorder.setDepth(-9.5f);
+        leftBorder.setDepth(-9f);
+        rightBorder.setDepth(-9f);
+        topBorder.setDepth(-9f);
+        bottomBorder.setDepth(-9f);
 
         hide();
     }
@@ -52,11 +67,11 @@ public class MessageBox : MarshalByRefObject {
         messageBackground = spriteRenderer.add(new Sprite(), "1px");
 
         messageBackground.visible(false);
-        messageBackground.setDepth(-9f);
+        messageBackground.setDepth(-8.75f);
     }
 
     public void setMessage(String message) {
-//        text.text = wrap(message);
+        text.setText(wrap(message));
         Debug.Log(message); // print it since we can't draw it yet
 //
 //        var textRect = text.GetScreenRect(Camera.main);
@@ -110,6 +125,8 @@ public class MessageBox : MarshalByRefObject {
         rightBorder.visible(true);
         topBorder.visible(true);
         bottomBorder.visible(true);
+
+        text.show();
     }
 
     public void hide() {
@@ -119,6 +136,8 @@ public class MessageBox : MarshalByRefObject {
         rightBorder.visible(false);
         topBorder.visible(false);
         bottomBorder.visible(false);
+
+        text.hide();
     }
 
 }

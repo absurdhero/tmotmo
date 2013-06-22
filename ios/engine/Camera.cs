@@ -40,7 +40,7 @@ public class Camera
 	}
 
 	public Vector3 WorldToScreenPoint(Vector3 source) {
-		return viewport.Project(source, projection, view, world); 
+		return viewport.Project(source, projection, view, world);
 	}
 
 	public Vector2 WorldToScreen2D (Vector2 screenPosition)

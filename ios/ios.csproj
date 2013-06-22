@@ -106,7 +106,9 @@
     <Compile Include="engine\Sprite.cs" />
     <Compile Include="engine\Game1.cs" />
     <Compile Include="scenes\TitleScene.cs" />
-    <Compile Include="engine\TexturedQuad.cs" />
+    <Compile Include="engine\TexturedQuad.cs">
+      <DependentUpon>Sprite.cs</DependentUpon>
+    </Compile>
     <Compile Include="engine\FullScreenQuad.cs" />
     <Compile Include="engine\Cycler.cs" />
     <Compile Include="engine\Time.cs" />
@@ -130,6 +132,11 @@
     <Compile Include="engine\MessageBox.cs" />
     <Compile Include="engine\Prompt.cs" />
     <Compile Include="engine\SpriteRenderer.cs" />
+    <Compile Include="engine\BMFont.cs" />
+    <Compile Include="engine\TextLabel.cs">
+      <DependentUpon>Sprite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="engine\Grid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -190,6 +197,8 @@
     <BundleResource Include="Content\HospitalRoom\z.png" />
     <BundleResource Include="Content\messageBorder.png" />
     <BundleResource Include="Content\1px.png" />
+    <BundleResource Include="Content\sierra_agi_font_0.png" />
+    <BundleResource Include="Content\sierra_agi_font.fnt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

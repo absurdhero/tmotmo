@@ -66,14 +66,16 @@ public class HospitalRoom {
 
 		guyLeft.setScreenPosition((int) camera.pixelWidth / 2 - guyLeft.PixelWidth() + guyCenterOffset,
 									 (int) camera.pixelHeight / 2 - guyLeft.PixelHeight() / 2);
+        guyLeft.setDepth(-2);
 		guyRight.setScreenPosition((int) camera.pixelWidth / 2 + guyCenterOffset,
 									  (int) camera.pixelHeight / 2 - guyRight.PixelHeight() / 2);
+        guyRight.setDepth(-2);
 		guyLeftInitialPosition = guyLeft.getScreenPosition();
 		guyRightInitialPosition = guyRight.getScreenPosition();
 		
         eyes = spriteRenderer.add(new Sprite(), this, "eyes1", "eyes2");
 		eyes.setScreenPosition(232.2f, 89f);
-        eyes.setDepth(-1);
+        eyes.setDepth(-3);
 	}
 	
 	public void addZzz() {
@@ -107,6 +109,7 @@ public class HospitalRoom {
 		}
         cover = spriteRenderer.add(new Sprite(), this, "cover-fixed");
 		cover.setCenterToViewportCoord(0.515f, 0.34f);
+        cover.setDepth(-4f);
 	}
 	
 	public void removeCover() {
@@ -118,13 +121,13 @@ public class HospitalRoom {
 
         footBoard = spriteRenderer.add(new Sprite(), this, "footrest-fixed");
         footBoard.setScreenPosition(169, 226);
-        footBoard.setDepth(-1f);
+        footBoard.setDepth(-5f);
 	}
 	
 	private void addClipBoard() {
         clipBoard = spriteRenderer.add(new Sprite(), this, "chart-fixed");
         clipBoard.setScreenPosition(220, 220);
-        clipBoard.setDepth(-1f);
+        clipBoard.setDepth(-5f);
 	}
 	
 	public void addHeartRate(float startTime) {

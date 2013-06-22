@@ -157,6 +157,12 @@
     <Compile Include="..\ios\engine\SpriteRenderer.cs">
       <Link>engine\SpriteRenderer.cs</Link>
     </Compile>
+    <Compile Include="..\ios\engine\TextLabel.cs">
+      <Link>engine\TextLabel.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\BMFont.cs">
+      <Link>engine\BMFont.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

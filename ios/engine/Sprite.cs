@@ -5,6 +5,7 @@ using System;
 public class Sprite : MarshalByRefObject {
     public Texture2D[] textures;
     public Transform transform = new Transform();
+    public Rectangle cropArea = Rectangle.Empty;
 
 	public int height = 0;
 	public int width = 0;
@@ -38,7 +39,13 @@ public class Sprite : MarshalByRefObject {
 
 	virtual public Quad createMesh()
 	{
-        return new Quad(transform.Translation, transform.Forward, transform.Down, transform.Right, width, height);
+        var quad = new Quad(transform.Translation, transform.Forward, transform.Down, transform.Right, width, height);
+
+        if (cropArea != Rectangle.Empty) {
+            quad.cropTextureToRectangle(cropArea, textures[texture_index].Width, textures[texture_index].Height);
+        }
+
+        return quad;
 	}
 
 	void Update() {

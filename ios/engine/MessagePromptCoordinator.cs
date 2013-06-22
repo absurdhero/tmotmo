@@ -49,6 +49,7 @@ public class MessagePromptCoordinator : MarshalByRefObject {
         touchedObject = null;
         prompt.hide();
         messageBox.hide();
+        messageBox.registerSprites();
         displayingAnything = false;
     }
 

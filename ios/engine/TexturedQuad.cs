@@ -84,5 +84,18 @@ public struct Quad
 		Indexes[4] = 1;
 		Indexes[5] = 3;
 	}
+
+    // sets UV coordinates to only display the rectangular portion of the texture on the mesh
+    public void cropTextureToRectangle(Rectangle cell, int textureWidth, int textureHeight) {
+
+        var cellAsUV = new Rectangle((int) (cell.X / (float) textureWidth),
+                                     (int) (cell.Y / (float) textureHeight),
+                                cell.Width / textureWidth, cell.Height / textureHeight);
+
+        Vertices[0].TextureCoordinate = new Vector2(cellAsUV.Right, cellAsUV.Bottom);
+        Vertices[1].TextureCoordinate = new Vector2(cellAsUV.Left, cellAsUV.Bottom);
+        Vertices[2].TextureCoordinate = new Vector2(cellAsUV.Right, cellAsUV.Top);
+        Vertices[3].TextureCoordinate = new Vector2(cellAsUV.Left, cellAsUV.Top);
+    }
 }
 
