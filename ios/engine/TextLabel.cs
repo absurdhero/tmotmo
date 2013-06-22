@@ -91,11 +91,11 @@ public class TextLabel : Sprite {
                 if (dx > maxWidth) {
                     maxWidth = dx;
                 }
+            }
 
-                if (c == '\n') {
-                    dy += lineHeight;
-                    dx = 0;
-                }
+            if (c == '\n') {
+                dy += lineHeight;
+                dx = 0;
             }
         }
 
