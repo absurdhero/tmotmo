@@ -24,7 +24,6 @@ public struct Quad
 	public Vector3 LowerRight;
 	public Vector3 Normal;
 	public Vector3 Up;
-	public Vector3 Left;
 	public Vector3 Right;
 
 	public VertexPositionNormalTexture[] Vertices;

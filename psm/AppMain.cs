@@ -10,39 +10,13 @@ namespace tmotmo.psm
 {
 	public class AppMain
 	{
-		private static GraphicsContext graphics;
+		private static Game1 game;
 		
 		public static void Main (string[] args)
 		{
-			Initialize ();
+			game = new Game1();
+			game.Run();
 
-			while (true) {
-				SystemEvents.CheckEvents ();
-				Update ();
-				Render ();
-			}
-		}
-
-		public static void Initialize ()
-		{
-			// Set up the graphics system
-			graphics = new GraphicsContext ();
-		}
-
-		public static void Update ()
-		{
-			// Query gamepad for current state
-			var gamePadData = GamePad.GetData (0);
-		}
-
-		public static void Render ()
-		{
-			// Clear the screen
-			graphics.SetClearColor (0.0f, 0.0f, 0.0f, 0.0f);
-			graphics.Clear ();
-
-			// Present the screen
-			graphics.SwapBuffers ();
 		}
 	}
 }

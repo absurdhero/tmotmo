@@ -37,6 +37,99 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppMain.cs" />
+    <Compile Include="..\ios\engine\Application.cs">
+      <Link>engine\Application.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\BMFont.cs">
+      <Link>engine\BMFont.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Camera.cs">
+      <Link>engine\Camera.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Cycler.cs">
+      <Link>engine\Cycler.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Debug.cs">
+      <Link>engine\Debug.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\DelayedCycler.cs">
+      <Link>engine\DelayedCycler.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\FullScreenQuad.cs">
+      <Link>engine\FullScreenQuad.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Game1.cs">
+      <Link>engine\Game1.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Grid.cs">
+      <Link>engine\Grid.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\LoopTracker.cs">
+      <Link>engine\LoopTracker.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\MessageBox.cs">
+      <Link>engine\MessageBox.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\MessagePromptCoordinator.cs">
+      <Link>engine\MessagePromptCoordinator.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Prompt.cs">
+      <Link>engine\Prompt.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Repeater.cs">
+      <Link>engine\Repeater.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Scene.cs">
+      <Link>engine\Scene.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SceneFactory.cs">
+      <Link>engine\SceneFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SceneManager.cs">
+      <Link>engine\SceneManager.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Sprite.cs">
+      <Link>engine\Sprite.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SpriteRenderer.cs">
+      <Link>engine\SpriteRenderer.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SpriteTouchExtensions.cs">
+      <Link>engine\SpriteTouchExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\TextLabel.cs">
+      <Link>engine\TextLabel.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\TexturedQuad.cs">
+      <Link>engine\TexturedQuad.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Time.cs">
+      <Link>engine\Time.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\TouchSensor.cs">
+      <Link>engine\TouchSensor.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Transform.cs">
+      <Link>engine\Transform.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\UnityInput.cs">
+      <Link>engine\UnityInput.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\Wiggler.cs">
+      <Link>engine\Wiggler.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\HospitalRoom.cs">
+      <Link>scenes\HospitalRoom.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\SceneOne.cs">
+      <Link>scenes\SceneOne.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\SceneTwo.cs">
+      <Link>scenes\SceneTwo.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\scenes\TitleScene.cs">
+      <Link>scenes\TitleScene.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ShaderProgram Include="shaders\Simple.fcg" />
@@ -46,4 +139,190 @@
     <PsmMetadata Include="app.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Sce\Sce.Psm.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="engine\" />
+    <Folder Include="scenes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\ios\Content\1px.png">
+      <Link>Content\1px.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\logo.png">
+      <Link>Content\logo.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\messageBorder.png">
+      <Link>Content\messageBorder.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\sierra_agi_font_0.png">
+      <Link>Content\sierra_agi_font_0.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\chart-fixed.png">
+      <Link>Content\HospitalRoom\chart-fixed.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\cover-fixed.png">
+      <Link>Content\HospitalRoom\cover-fixed.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\eyes1.png">
+      <Link>Content\HospitalRoom\eyes1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\eyes2.png">
+      <Link>Content\HospitalRoom\eyes2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\footrest-fixed.png">
+      <Link>Content\HospitalRoom\footrest-fixed.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\guy1-fixed.png">
+      <Link>Content\HospitalRoom\guy1-fixed.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\guy2-fixed.png">
+      <Link>Content\HospitalRoom\guy2-fixed.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart1.png">
+      <Link>Content\HospitalRoom\heart1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart2.png">
+      <Link>Content\HospitalRoom\heart2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart3.png">
+      <Link>Content\HospitalRoom\heart3.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart4.png">
+      <Link>Content\HospitalRoom\heart4.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart5.png">
+      <Link>Content\HospitalRoom\heart5.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart6.png">
+      <Link>Content\HospitalRoom\heart6.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\heart7.png">
+      <Link>Content\HospitalRoom\heart7.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\hospital_bg.png">
+      <Link>Content\HospitalRoom\hospital_bg.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\HospitalRoom\z.png">
+      <Link>Content\HospitalRoom\z.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\bg.png">
+      <Link>Content\SceneOne\bg.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\circle1.png">
+      <Link>Content\SceneOne\circle1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\circle2.png">
+      <Link>Content\SceneOne\circle2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\circle3.png">
+      <Link>Content\SceneOne\circle3.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\circle4.png">
+      <Link>Content\SceneOne\circle4.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\circle5.png">
+      <Link>Content\SceneOne\circle5.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\notsame.png">
+      <Link>Content\SceneOne\notsame.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\notsame_caps.png">
+      <Link>Content\SceneOne\notsame_caps.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\notsame_g1.png">
+      <Link>Content\SceneOne\notsame_g1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\notsame_g2.png">
+      <Link>Content\SceneOne\notsame_g2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\same.png">
+      <Link>Content\SceneOne\same.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\triangle1.png">
+      <Link>Content\SceneOne\triangle1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\triangle2.png">
+      <Link>Content\SceneOne\triangle2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\SceneOne\triangle3.png">
+      <Link>Content\SceneOne\triangle3.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\bg.png">
+      <Link>Content\TitleScene\bg.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\itunes1.png">
+      <Link>Content\TitleScene\itunes1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\itunes2.png">
+      <Link>Content\TitleScene\itunes2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\news1.png">
+      <Link>Content\TitleScene\news1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\news2.png">
+      <Link>Content\TitleScene\news2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\p1.png">
+      <Link>Content\TitleScene\p1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\p2.png">
+      <Link>Content\TitleScene\p2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\p3.png">
+      <Link>Content\TitleScene\p3.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\p4.png">
+      <Link>Content\TitleScene\p4.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\p5.png">
+      <Link>Content\TitleScene\p5.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\p6.png">
+      <Link>Content\TitleScene\p6.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tap1.png">
+      <Link>Content\TitleScene\tap1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tap2.png">
+      <Link>Content\TitleScene\tap2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tap3.png">
+      <Link>Content\TitleScene\tap3.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tmo1.png">
+      <Link>Content\TitleScene\tmo1.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tmo2.png">
+      <Link>Content\TitleScene\tmo2.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tmo3.png">
+      <Link>Content\TitleScene\tmo3.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tmo4.png">
+      <Link>Content\TitleScene\tmo4.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tmo5.png">
+      <Link>Content\TitleScene\tmo5.png</Link>
+    </Content>
+    <Content Include="..\ios\Content\TitleScene\tmo6.png">
+      <Link>Content\TitleScene\tmo6.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\ios\Content\sierra_agi_font.fnt">
+      <Link>Content\sierra_agi_font.fnt</Link>
+    </None>
+    <None Include="..\ios\Content\sierra_agi_font.ttf">
+      <Link>Content\sierra_agi_font.ttf</Link>
+    </None>
+    <None Include="..\ios\Content\TitleScene\.DS_Store">
+      <Link>Content\TitleScene\.DS_Store</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.PSMobile.csproj">
+      <Project>{EA26E76F-FDFE-4A8C-B5A3-C3B5761E28F9}</Project>
+      <Name>MonoGame.Framework.PSMobile</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
