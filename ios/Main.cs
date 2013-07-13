@@ -8,11 +8,11 @@ using MonoTouch.UIKit;
 [Register("AppDelegate")]
 class Program : UIApplicationDelegate
 {
-	Game1 game;
+	SameNotSame game;
 
 	public override void FinishedLaunching (UIApplication app)
 	{
-		game = new Game1 ();
+		game = new SameNotSame ();
 		game.Run ();
 	}
 
