@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class MessageBox : MarshalByRefObject {
-    const int lineWidth = 20;
+    const int lineWidth = 30;
 
 //    GameObject textLabel;
 //    GUIText text;

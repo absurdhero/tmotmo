@@ -74,7 +74,7 @@ public class HospitalRoom {
 		guyRightInitialPosition = guyRight.getScreenPosition();
 		
         eyes = spriteRenderer.add(new Sprite(), this.GetType(), "eyes1", "eyes2");
-		eyes.setScreenPosition(232.2f, 89f);
+		eyes.setScreenPosition(232f, 89f);
         eyes.setDepth(-3);
 	}
 	
@@ -127,7 +127,7 @@ public class HospitalRoom {
 	private void addClipBoard() {
         clipBoard = spriteRenderer.add(new Sprite(), this.GetType(), "chart-fixed");
         clipBoard.setScreenPosition(220, 220);
-        clipBoard.setDepth(-5f);
+        clipBoard.setDepth(-5.5f);
 	}
 	
 	public void addHeartRate(float startTime) {
