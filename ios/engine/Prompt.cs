@@ -11,6 +11,8 @@ public class Prompt : MarshalByRefObject {
     TextLabel text;
     Sprite blackBox;
 
+    const int blackBoxHeight = 30;
+
     public Prompt(SpriteRenderer spriteRenderer, ContentManager contentManager) {
         this.contentManager = contentManager;
         this.spriteRenderer = spriteRenderer;
@@ -22,9 +24,9 @@ public class Prompt : MarshalByRefObject {
         blackTexture.SetData(new byte[] { 0, 0, 0, 255 });
 
         blackBox = spriteRenderer.add(new Sprite(), blackTexture, new Point(1, 1));
-        blackBox.setCenterToViewportCoord(0f, 0.25f);
+        blackBox.setScreenPosition(0, Camera.main.pixelHeight - blackBoxHeight);
         blackBox.setDepth(-8.75f);
-        blackBox.transform.localScale = new Vector3(Camera.main.pixelWidth, 80, 1f);
+        blackBox.transform.localScale = new Vector3(Camera.main.pixelWidth, blackBoxHeight, 1f);
         blackBox.isVisible = false;
     }
 
@@ -35,8 +37,9 @@ public class Prompt : MarshalByRefObject {
 
     public void registerSprites() {
         text = TextLabel.create(spriteRenderer, contentManager, "sierra_agi_font_white");
+        
         text.isVisible = false;
-        text.transform.localTranslation = new Vector3(0f, 100f, 0f);
+        text.setScreenPosition(4, Camera.main.pixelHeight - blackBoxHeight + 2);
         text.setDepth(-9.5f);
 
         buildBlackBox(spriteRenderer);

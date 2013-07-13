@@ -16,6 +16,7 @@ public class TextLabel : Sprite {
 
     Dictionary<char, FontChar> characterMap;
     public List<Sprite> sprites { get; private set; }
+    public bool alignCenter { get; set; }
 
     public static TextLabel create(SpriteRenderer spriteRenderer, ContentManager contentManager, String fontName) {
         FontFile fontFile;
@@ -101,7 +102,9 @@ public class TextLabel : Sprite {
 
         int maxHeight = dy + lineHeight;
 
-        centerText(maxWidth, maxHeight);
+        if (alignCenter) {
+            centerText(maxWidth, maxHeight);
+        }
 
         this.width = maxWidth;
         this.height = maxHeight;
