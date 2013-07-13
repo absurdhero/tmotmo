@@ -104,7 +104,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="engine\Camera.cs" />
     <Compile Include="engine\Sprite.cs" />
-    <Compile Include="engine\Game1.cs" />
     <Compile Include="scenes\TitleScene.cs" />
     <Compile Include="engine\TexturedQuad.cs">
       <DependentUpon>Sprite.cs</DependentUpon>
@@ -137,6 +136,7 @@
       <DependentUpon>Sprite.cs</DependentUpon>
     </Compile>
     <Compile Include="engine\Grid.cs" />
+    <Compile Include="engine\SameNotSame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -199,6 +199,10 @@
     <BundleResource Include="Content\1px.png" />
     <BundleResource Include="Content\sierra_agi_font_0.png" />
     <BundleResource Include="Content\sierra_agi_font.fnt" />
+    <BundleResource Include="Content\sierra_agi_font_black_0.png" />
+    <BundleResource Include="Content\sierra_agi_font_white_0.png" />
+    <BundleResource Include="Content\sierra_agi_font_white.fnt" />
+    <BundleResource Include="Content\sierra_agi_font_black.fnt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

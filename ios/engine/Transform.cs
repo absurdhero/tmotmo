@@ -25,7 +25,7 @@ public class Transform
         }
     }
 
-    public bool hasParent() {
+    private bool hasParent() {
         return parent != null;
     }
 

@@ -76,9 +76,6 @@
     <Compile Include="..\ios\engine\Camera.cs">
       <Link>engine\Camera.cs</Link>
     </Compile>
-    <Compile Include="..\ios\engine\Game1.cs">
-      <Link>engine\Game1.cs</Link>
-    </Compile>
     <Compile Include="..\ios\engine\Sprite.cs">
       <Link>engine\Sprite.cs</Link>
     </Compile>
@@ -162,6 +159,9 @@
     </Compile>
     <Compile Include="..\ios\engine\BMFont.cs">
       <Link>engine\BMFont.cs</Link>
+    </Compile>
+    <Compile Include="..\ios\engine\SameNotSame.cs">
+      <Link>engine\SameNotSame.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -28,11 +28,11 @@ namespace monomac
 
 	class AppDelegate : NSApplicationDelegate
 	{
-		Game1 game;
+		SameNotSame game;
 
 		public override void FinishedLaunching (MonoMac.Foundation.NSObject notification)
 		{
-			game = new Game1 ();
+            game = new SameNotSame ();
 			game.Run ();
 		}
 		

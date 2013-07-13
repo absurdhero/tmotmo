@@ -10,12 +10,23 @@ public class SpriteRenderer
     ContentManager content;
     public GraphicsDeviceManager graphics;
 
-    ISet<Sprite> sprites = new HashSet<Sprite>();
+    AlphaTestEffect quadEffect;
+
+    IList<Sprite> sprites = new List<Sprite>();
+
+    int depthHash = 0;
+    int numberOfSprites = 0;
 
     public SpriteRenderer(GraphicsDeviceManager graphics, ContentManager content)
     {
         this.graphics = graphics;
         this.content = content;
+
+        quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
+
+        quadEffect.World = Camera.main.world;
+        quadEffect.View = Camera.main.view;
+        quadEffect.Projection = Camera.main.projection;
     }
 
     string[] pathsForClassName (Type type, string[] textureNames)
@@ -75,23 +86,38 @@ public class SpriteRenderer
     }
 
     public void Draw() {
-        foreach(var sprite in sprites.OrderBy<Sprite, float>((sprite) => sprite.screenPosition.Z)) {
+        // recompute draw order if the sprites may have moved
+        int nextDepthHash;
+        if (numberOfSprites != sprites.Count ||
+            depthHash != (nextDepthHash = computeZHash())) {
+
+            depthHash = nextDepthHash;
+            numberOfSprites = sprites.Count;
+
+            sprites = sprites.OrderBy<Sprite, float>((sprite) => sprite.screenPosition.Z).ToList();
+        }
+
+        foreach (var sprite in sprites) {
             Draw(sprite);
         }
     }
 
+    int computeZHash()
+    {
+        int nextDepthHash = 0;
+
+        foreach (var sprite in sprites)
+        {
+            nextDepthHash ^= sprite.screenPosition.Z.GetHashCode();
+        }
+        return nextDepthHash;
+    }
+
     void Draw(Sprite sprite) {
         if (sprite.isVisible) {
-            //Debug.Log("Drawing " + sprite.screenPosition + " " + sprite.textures[0].name);
-            Quad quad = sprite.createMesh();
+            var quad = sprite.createMesh();
 
-            var quadEffect = new AlphaTestEffect(graphics.GraphicsDevice);
-
-            quadEffect.World = Camera.main.world;
-            quadEffect.View = Camera.main.view;
-            quadEffect.Projection = Camera.main.projection;
             quadEffect.Texture = sprite.textures[sprite.texture_index];
-
 
             foreach (EffectPass pass in quadEffect.CurrentTechnique.Passes)
             {

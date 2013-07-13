@@ -229,12 +229,5 @@ public class Sprite : MarshalByRefObject {
 		newpos.Z = pos.Z;
 		return newpos;
 	}
-//	
-//	private void copyTransformTo(GameObject obj) {
-//		obj.transform.parent = gameObject.transform.parent;
-//		obj.transform.localRotation = gameObject.transform.localRotation;
-//		obj.transform.localScale = gameObject.transform.localScale;
-//		obj.transform.localPosition = gameObject.transform.localPosition;
-//	}
 
 }

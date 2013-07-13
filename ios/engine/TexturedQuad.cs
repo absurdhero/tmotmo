@@ -17,6 +17,13 @@ using Microsoft.Xna.Framework.Content;
 
 public struct Quad
 {
+    // Fill in texture coordinates to display full texture
+    // on quad
+    static Vector2 textureUpperLeft = new Vector2( 0.0f, 0.0f );
+    static Vector2 textureUpperRight = new Vector2( 1.0f, 0.0f );
+    static Vector2 textureLowerLeft = new Vector2( 0.0f, 1.0f );
+    static Vector2 textureLowerRight = new Vector2( 1.0f, 1.0f );
+
 	public Vector3 Origin;
 	public Vector3 UpperLeft;
 	public Vector3 LowerLeft;
@@ -28,7 +35,7 @@ public struct Quad
 
 	public VertexPositionNormalTexture[] Vertices;
 	public short[] Indexes;
-			
+
 	public Quad( Vector3 origin, Vector3 normal, Vector3 up, Vector3 right,
 	            float width, float height )
 	{
@@ -50,12 +57,6 @@ public struct Quad
 	
 	private void FillVertices()
 	{
-		// Fill in texture coordinates to display full texture
-		// on quad
-		Vector2 textureUpperLeft = new Vector2( 0.0f, 0.0f );
-		Vector2 textureUpperRight = new Vector2( 1.0f, 0.0f );
-		Vector2 textureLowerLeft = new Vector2( 0.0f, 1.0f );
-		Vector2 textureLowerRight = new Vector2( 1.0f, 1.0f );
 		
 		// Provide a normal for each vertex
 		for (int i = 0; i < Vertices.Length; i++)
