@@ -18,9 +18,9 @@ public class SpriteRenderer
         this.content = content;
     }
 
-    string[] pathsForClassName (object obj, string[] textureNames)
+    string[] pathsForClassName (Type type, string[] textureNames)
     {
-        var resourcePrefix = obj.GetType ().ToString ();
+        var resourcePrefix = type.ToString();
         string[] texturePaths = new string[textureNames.Length];
         for (int i = 0; i < textureNames.Length; i++) {
             texturePaths [i] = resourcePrefix + "/" + textureNames [i];
@@ -38,8 +38,8 @@ public class SpriteRenderer
         return textures;
     }
 
-    public Sprite add(Sprite sprite, object obj, params string[] textureNames) {
-        return add(sprite, pathsForClassName(obj, textureNames));
+    public Sprite add(Sprite sprite, Type type, params string[] textureNames) {
+        return add(sprite, pathsForClassName(type, textureNames));
     }
 
     public Sprite add(Sprite sprite, params string[] texturePaths) {

@@ -99,7 +99,6 @@ public class SceneManager {
 
     public void Draw() {
         currentScene.Draw();
-        messagePromptCoordinator.Draw();
     }
 
 	public float timeLeftInCurrentLoop() {

@@ -40,16 +40,12 @@ public class MessagePromptCoordinator : MarshalByRefObject {
         }
     }
 
-    public void Draw()
-    {
-        prompt.Draw();
-    }
-
     public void Reset() {
         touchedObject = null;
         prompt.hide();
         messageBox.hide();
         messageBox.registerSprites();
+        prompt.registerSprites();
         displayingAnything = false;
     }
 

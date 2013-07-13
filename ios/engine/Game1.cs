@@ -59,7 +59,7 @@ public class Game1 : Game
 	protected override void LoadContent ()
 	{
         var spriteRenderer = new SpriteRenderer(graphics, Content);
-        prompt = new Prompt();
+        prompt = new Prompt(spriteRenderer, Content);
         messageBox = new MessageBox(Content, spriteRenderer);
         sceneManager = new SceneManager(new LoopTracker(),
                                         new MessagePromptCoordinator(prompt, messageBox));

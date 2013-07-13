@@ -31,10 +31,10 @@ class SceneOne : Scene {
         background = spriteRenderer.add(new FullScreenQuad(), "TitleScene/bg");
 		background.visible(false);
 
-        same = spriteRenderer.add(new Sprite(), this, "same");
-        notSame = spriteRenderer.add(new Sprite(), this, "notsame", "notsame_caps", "notsame_g1", "notsame_g2");
-        circle = spriteRenderer.add(new Sprite(), this, "circle1", "circle2", "circle3", "circle4", "circle5");
-        triangle = spriteRenderer.add(new Sprite(), this, "triangle1", "triangle2", "triangle3");
+        same = spriteRenderer.add(new Sprite(), this.GetType(), "same");
+        notSame = spriteRenderer.add(new Sprite(), this.GetType(), "notsame", "notsame_caps", "notsame_g1", "notsame_g2");
+        circle = spriteRenderer.add(new Sprite(), this.GetType(), "circle1", "circle2", "circle3", "circle4", "circle5");
+        triangle = spriteRenderer.add(new Sprite(), this.GetType(), "triangle1", "triangle2", "triangle3");
 
 		same.visible(false);
 		notSame.visible(false);

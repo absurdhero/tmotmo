@@ -35,7 +35,7 @@ public class MessageBox : MarshalByRefObject {
     public void registerSprites() {
         buildMessageBackground();
 
-        text = TextLabel.create(spriteRenderer, contentManager, "sierra_agi_font");
+        text = TextLabel.create(spriteRenderer, contentManager, "sierra_agi_font_black");
         text.worldPosition = new Vector3(0.5f, 0.5f, -9.5f);
         text.hide();
 

@@ -1,47 +1,59 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 public class Prompt : MarshalByRefObject {
-//    Sprite textLabel, blackBox;
-//    GUIText text;
+    SpriteRenderer spriteRenderer;
+    ContentManager contentManager;
 
-    public Prompt() { //Sprite textLabel, GUIText text) {
-//        this.textLabel = textLabel;
-//        this.text = text;
-        buildBlackBox();
+    TextLabel text;
+    Sprite blackBox;
+
+    public Prompt(SpriteRenderer spriteRenderer, ContentManager contentManager) {
+        this.contentManager = contentManager;
+        this.spriteRenderer = spriteRenderer;
+        registerSprites();
     }
 
-    public void Draw()
-    {
-       
-    }
+    void buildBlackBox(SpriteRenderer spriteRenderer) {
+        var blackTexture = new Texture2D(spriteRenderer.graphics.GraphicsDevice, 1, 1);
+        blackTexture.SetData(new byte[] { 0, 0, 0, 255 });
 
-    void buildBlackBox() {
-//        blackBox = GameObject.CreatePrimitive(PrimitiveType.Plane);
-//        blackBox.active = false;
-//        blackBox.name = "prompt background";
-//        blackBox.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.black);
-//        blackBox.transform.Rotate(new Vector3(270f, 0f, 0f));
-//        blackBox.transform.position = new Vector3(0, -95, -9);
-//        blackBox.transform.localScale = new Vector3(30f, 1f, 1.5f);
+        blackBox = spriteRenderer.add(new Sprite(), blackTexture, new Point(1, 1));
+        blackBox.setCenterToViewportCoord(0f, 0.25f);
+        blackBox.setDepth(-8.75f);
+        blackBox.transform.localScale = new Vector3(Camera.main.pixelWidth, 80, 1f);
+        blackBox.isVisible = false;
     }
 
     public void Destroy() {
-//        Sprite.Destroy(textLabel);
+        spriteRenderer.remove(text);
+        spriteRenderer.remove(blackBox);
+    }
+
+    public void registerSprites() {
+        text = TextLabel.create(spriteRenderer, contentManager, "sierra_agi_font_white");
+        text.isVisible = false;
+        text.transform.localTranslation = new Vector3(0f, 100f, 0f);
+        text.setDepth(-9.5f);
+
+        buildBlackBox(spriteRenderer);
     }
 
     public void setText(string action) {
-//        text.text = ">" + action + "_";
+        text.setText(">" + action + "_");
     }
 
     public void show() {
-//        blackBox.active = true;
-//        textLabel.active = true;
+        blackBox.isVisible = true;
+        text.show();
     }
 
     public void hide() {
-//        blackBox.active = false;
-//        textLabel.active = false;
+        blackBox.isVisible = false;
+        text.hide();
     }
 }
 

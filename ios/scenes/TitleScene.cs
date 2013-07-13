@@ -18,12 +18,12 @@ public class TitleScene : Scene {
 	}
 
 	public override void Setup(float startTime) {
-		background = spriteRenderer.add(new FullScreenQuad(), this, new[] {"bg"});
-        title = spriteRenderer.add(new Sprite(), this, new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
-        subtitle = spriteRenderer.add(new Sprite(), this, new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
-        news = spriteRenderer.add(new Sprite(), this, new[] {"news1", "news2"});
-        buyMusic = spriteRenderer.add(new Sprite(), this, new[] {"itunes1", "itunes2"});
-        startButton = spriteRenderer.add(new Sprite(), this, new[] {"tap1", "tap2", "tap3"});
+		background = spriteRenderer.add(new FullScreenQuad(), this.GetType(), new[] {"bg"});
+        title = spriteRenderer.add(new Sprite(), this.GetType(), new[] {"tmo1", "tmo2", "tmo3", "tmo4", "tmo5", "tmo6"});
+        subtitle = spriteRenderer.add(new Sprite(), this.GetType(), new[] {"p1", "p2", "p3", "p4", "p5", "p6"});
+        news = spriteRenderer.add(new Sprite(), this.GetType(), new[] {"news1", "news2"});
+        buyMusic = spriteRenderer.add(new Sprite(), this.GetType(), new[] {"itunes1", "itunes2"});
+        startButton = spriteRenderer.add(new Sprite(), this.GetType(), new[] {"tap1", "tap2", "tap3"});
 		
 		Camera camera = Camera.main;
 

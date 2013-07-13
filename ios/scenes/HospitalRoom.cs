@@ -38,7 +38,7 @@ public class HospitalRoom {
 	}
 
 	public void createBackground() {
-		room = spriteRenderer.add(new FullScreenQuad(), this, "hospital_bg");
+        room = spriteRenderer.add(new FullScreenQuad(), this.GetType(), "hospital_bg");
 	}
 
 	private void DestroyIfNotNull(Sprite sprite) {
@@ -61,8 +61,8 @@ public class HospitalRoom {
 	}
 	
 	public void addPerson() {
-        guyLeft = spriteRenderer.add(new Sprite(), this, "guy1-fixed");
-        guyRight = spriteRenderer.add(new Sprite(), this, "guy2-fixed");
+        guyLeft = spriteRenderer.add(new Sprite(), this.GetType(), "guy1-fixed");
+        guyRight = spriteRenderer.add(new Sprite(), this.GetType(), "guy2-fixed");
 
 		guyLeft.setScreenPosition((int) camera.pixelWidth / 2 - guyLeft.PixelWidth() + guyCenterOffset,
 									 (int) camera.pixelHeight / 2 - guyLeft.PixelHeight() / 2);
@@ -73,13 +73,13 @@ public class HospitalRoom {
 		guyLeftInitialPosition = guyLeft.getScreenPosition();
 		guyRightInitialPosition = guyRight.getScreenPosition();
 		
-        eyes = spriteRenderer.add(new Sprite(), this, "eyes1", "eyes2");
+        eyes = spriteRenderer.add(new Sprite(), this.GetType(), "eyes1", "eyes2");
 		eyes.setScreenPosition(232.2f, 89f);
         eyes.setDepth(-3);
 	}
 	
 	public void addZzz() {
-        zzz = spriteRenderer.add(new Sprite(), this, "z");
+        zzz = spriteRenderer.add(new Sprite(), this.GetType(), "z");
 		zzz.setScreenPosition(320, 70);
         zzz.setDepth(-1);
 		zzzAnimator = new ZzzAnimator(zzz);
@@ -107,7 +107,7 @@ public class HospitalRoom {
             cover.isVisible = true;
 			return;
 		}
-        cover = spriteRenderer.add(new Sprite(), this, "cover-fixed");
+        cover = spriteRenderer.add(new Sprite(), this.GetType(), "cover-fixed");
 		cover.setCenterToViewportCoord(0.515f, 0.34f);
         cover.setDepth(-4f);
 	}
@@ -119,19 +119,19 @@ public class HospitalRoom {
 	public void addFootboard() {
 		addClipBoard();
 
-        footBoard = spriteRenderer.add(new Sprite(), this, "footrest-fixed");
+        footBoard = spriteRenderer.add(new Sprite(), this.GetType(), "footrest-fixed");
         footBoard.setScreenPosition(169, 226);
         footBoard.setDepth(-5f);
 	}
 	
 	private void addClipBoard() {
-        clipBoard = spriteRenderer.add(new Sprite(), this, "chart-fixed");
+        clipBoard = spriteRenderer.add(new Sprite(), this.GetType(), "chart-fixed");
         clipBoard.setScreenPosition(220, 220);
         clipBoard.setDepth(-5f);
 	}
 	
 	public void addHeartRate(float startTime) {
-        heartRate = spriteRenderer.add(new Sprite(), this, "heart1", "heart2", "heart3", "heart4", "heart5", "heart6", "heart7");
+        heartRate = spriteRenderer.add(new Sprite(), this.GetType(), "heart1", "heart2", "heart3", "heart4", "heart5", "heart6", "heart7");
         heartRate.setScreenPosition(54, 110);
         heartRate.setDepth(-1);
 		
