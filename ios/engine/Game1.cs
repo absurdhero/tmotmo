@@ -46,6 +46,8 @@ public class Game1 : Game
 	protected override void Initialize ()
 	{
 		graphics.GraphicsDevice.BlendState = BlendState.AlphaBlend;
+        // disable blurriness for drawing retro pixel art
+        graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
 		camera = new Camera(graphics.GraphicsDevice.Viewport);
 		Camera.main = camera;
 
