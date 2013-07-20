@@ -11,7 +11,7 @@ public class Prompt : MarshalByRefObject {
     TextLabel text;
     Sprite blackBox;
 
-    const int blackBoxHeight = 30;
+    const int blackBoxHeight = 32;
 
     public Prompt(SpriteRenderer spriteRenderer, ContentManager contentManager) {
         this.contentManager = contentManager;
@@ -39,7 +39,7 @@ public class Prompt : MarshalByRefObject {
         text = TextLabel.create(spriteRenderer, contentManager, "sierra_agi_font_white");
         
         text.isVisible = false;
-        text.setScreenPosition(4, Camera.main.pixelHeight - blackBoxHeight + 2);
+        text.setScreenPosition(4, Camera.main.pixelHeight - blackBoxHeight + 8);
         text.setDepth(-9.5f);
 
         buildBlackBox(spriteRenderer);
