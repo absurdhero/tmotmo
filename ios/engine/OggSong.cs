@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Audio;
 using NVorbis;
 
 // https://gist.github.com/nickgravelyn/5580531
-class OggSong : IDisposable
+class OggSong : Song, IDisposable
 {
     private VorbisReader reader;
     private DynamicSoundEffectInstance effect;
@@ -25,6 +25,12 @@ class OggSong : IDisposable
     {
         get { return effect.Volume; }
         set { effect.Volume = MathHelper.Clamp(value, 0, 1); }
+    }
+    
+    public float Time
+    {
+        get;
+        set;
     }
 
     public bool IsLooped { get; set; }
@@ -173,6 +179,8 @@ class OggSong : IDisposable
 
                     effect.SubmitBuffer(buffer, 0, samplesRead);
                     effect.SubmitBuffer(buffer, samplesRead, samplesRead);
+                    
+                    Time += (float) effect.GetSampleDuration(samplesRead * 2).TotalSeconds;
                 }
             }
 

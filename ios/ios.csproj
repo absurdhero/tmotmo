@@ -141,6 +141,8 @@
     <Compile Include="engine\Grid.cs" />
     <Compile Include="engine\SameNotSame.cs" />
     <Compile Include="engine\OggSong.cs" />
+    <Compile Include="engine\Sounds.cs" />
+    <Compile Include="engine\Song.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />

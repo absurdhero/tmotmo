@@ -1,44 +1,72 @@
+using System;
 using System.Collections.Generic;
 
-public class LoopTracker
-{
+public class LoopTracker : MarshalByRefObject {
+	int repetition;
+	float loopStart = 0.0f;
+	float loopEnd = 0.0f;
+	
+	Sounds sounds;
 
-    public void Repeat()
-    {
-    }
+	public LoopTracker(Sounds sounds) {
+		this.sounds = sounds;
+	}
+	
+	public void startPlaying() {
+		sounds.startPlaying();
+	}
+	
+	public void Repeat() {
+		if (loopEnd == 0.0f) return;
 
-    public void Stop()
-    {
-    }
+		repetition++;
+		PlayRepetition();
+	}
 
-    public bool IsLoopOver()
-    {
-        return true;
-    }
+	public void NextLoop(float loopLength) {
+		repetition = 0;
+		loopStart = loopEnd;
+		loopEnd += loopLength;
+		PlayRepetition();
+	}
+	
+	public void ChangeLoopLength(float loopLength) {
+		loopEnd = loopStart + loopLength;
+	}
 
-    public void PlayAll()
-    {
-    }
+	public void Rewind(float seconds) {
+		loopStart -= seconds;
+		loopEnd -= seconds;
+	}
+	
+	public void PlayAll() {
+		sounds.playAllStems();
+	}
+	
+	public void PlayAllButVocals() {
+		List<Song> stems = new List<Song>(sounds.orderedStems);
+		stems.Remove(sounds.lead_bgvocals);
+		sounds.playStems(stems);
+	}
+	
+	public void Stop() {
+		loopStart = 0f;
+		loopEnd = 0f;
+		sounds.playStems(new List<Song>{});
+	}
 
-    public void startPlaying()
-    {
-    }
-
-    public void NextLoop(float f)
-    {
-    }
-
-    public void Rewind(float rewindTime)
-    {
-    }
-
-    public float TimeLeftInCurrentLoop()
-    {
-        return 1f;
-    }
-
-    public void ChangeLoopLength(float length)
-    {
-    }
+	public bool IsLoopOver() {
+		return (loopEnd == 0.0f) || (sounds.getAudioTime() > loopEnd);
+	}
+	
+	public float TimeLeftInCurrentLoop() {
+		if (IsLoopOver()) return 0.0f;
+		return loopEnd - sounds.getAudioTime();
+	}
+	
+	private void PlayRepetition() {
+		// Comment line to play all stems all the time
+		sounds.pickStemsFor(repetition);
+		sounds.setAudioTime(loopStart);
+	}
 }
-
