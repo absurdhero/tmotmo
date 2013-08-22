@@ -42,6 +42,9 @@ public class SameNotSame : Game
 
 	protected override void LoadContent ()
 	{
+
+        var oggSong = new OggSong("Content/Sounds/KEYS STEM_01.ogg");
+        oggSong.Play();
         var spriteRenderer = new SpriteRenderer(graphics, Content);
         prompt = new Prompt(spriteRenderer, Content);
         messageBox = new MessageBox(Content, spriteRenderer);

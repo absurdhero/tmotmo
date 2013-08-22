@@ -93,10 +93,13 @@
     <Reference Include="monotouch" />
     <Reference Include="OpenTK" />
     <Reference Include="MonoGame.Framework">
-      <HintPath>..\..\..\Library\Application Support\MonoDevelop-3.0\LocalInstall\Addins\MonoDevelop.MonoGame.3.0.1\assemblies\iOS\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\..\..\src\MonoGame-Fork\MonoGame.Framework\bin\iPhoneSimulator\Debug\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network">
-      <HintPath>..\..\..\Library\Application Support\MonoDevelop-3.0\LocalInstall\Addins\MonoDevelop.MonoGame.3.0.1\assemblies\iOS\Lidgren.Network.dll</HintPath>
+      <HintPath>..\..\..\src\MonoGame-Fork\MonoGame.Framework\bin\iPhoneSimulator\Debug\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="NVorbis">
+      <HintPath>..\..\..\src\nvorbis\bin\NVorbis.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +140,7 @@
     </Compile>
     <Compile Include="engine\Grid.cs" />
     <Compile Include="engine\SameNotSame.cs" />
+    <Compile Include="engine\OggSong.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -205,4 +209,36 @@
     <BundleResource Include="Content\sierra_agi_font_black.fnt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Content Include="Content\Sounds\BASS STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\BEATS STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\BG VOCALS STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\DRUM_BEATS FX STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\GUITARS 1 STEM.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\GUITARS 2 STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\KEYS STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\LEAD VOCALS FX STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\LEAD VOCALS STEM_01.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sounds\LIVE DRUM STEM_02.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

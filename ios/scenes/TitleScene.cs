@@ -27,9 +27,7 @@ public class TitleScene : Scene {
 		
 		Camera camera = Camera.main;
 
-		System.Console.WriteLine ("center " + title.Center ());
 		var layoutpos = camera.ViewportToWorldPoint(new Vector3(0.5f, 0.65f, 0));
-		System.Console.WriteLine ("layoutpos " + layoutpos);
 		layoutpos -= new Vector3(title.Center(), 0);
 		title.worldPosition = new Vector3(layoutpos.X, layoutpos.Y, title.worldPosition.Z);
 
